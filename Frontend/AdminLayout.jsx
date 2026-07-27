@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Sidebar from '../Frontend/src/components/AdminComponent/Sidebar'
+import Sidebar from './src/components/AdminComponent/Sidebar'
 import socketService from "./src/services/socket";
 import { toast } from "react-toastify";
 import useNotificationStore from "./src/Store/notificationStore";
