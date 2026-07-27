@@ -257,7 +257,7 @@ const StudentProfile = () => {
                                 <ArrowLeft size={20} className="text-slate-600" />
                             </button>
                             <div>
-                                <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none">Roots Classes</h1>
+                                <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none">Yogbodhi</h1>
                                 <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mt-1">Student Central</p>
                             </div>
                         </div>

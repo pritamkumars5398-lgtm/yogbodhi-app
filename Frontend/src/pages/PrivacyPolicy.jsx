@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
         {/* Header Section */}
         <div className="bg-gradient-to-r from-gray-800 to-gray-900 py-10 px-8">
           <h1 className="text-3xl font-bold text-white">Business Policies & Privacy</h1>
-          <p className="text-gray-400 mt-2">Roots Classes - Professional & Secure Educational Standards</p>
+          <p className="text-gray-400 mt-2">Yogbodhi - Professional & Secure Educational Standards</p>
         </div>
 
         {/* Content Section */}
@@ -29,7 +29,7 @@ const PrivacyPolicy = () => {
               Privacy Policy
             </h2>
             <p>
-              Roots Classes values your privacy. We collect basic details such as name, contact number, and school information only to enhance your academic journey. We do <b>not sell or share</b> your data with third parties. Your information is stored securely and used strictly for educational communication purposes.
+              Yogbodhi values your privacy. We collect basic details such as name, contact number, and school information only to enhance your academic journey. We do <b>not sell or share</b> your data with third parties. Your information is stored securely and used strictly for educational communication purposes.
             </p>
           </section>
 
@@ -37,13 +37,13 @@ const PrivacyPolicy = () => {
             <section className="bg-gray-50 p-6 rounded-xl border border-gray-200">
               <h3 className="font-bold text-gray-900 mb-2">Return Policy</h3>
               <p className="text-sm">
-                Roots Classes does not sell physical goods. Therefore, no return policy is applicable.
+                Yogbodhi does not sell physical goods. Therefore, no return policy is applicable.
               </p>
             </section>
             <section className="bg-gray-50 p-6 rounded-xl border border-gray-200">
               <h3 className="font-bold text-gray-900 mb-2">Shipping Policy</h3>
               <p className="text-sm">
-                Roots Classes does not ship physical goods. All educational content is provided digitally or at the institute location.
+                Yogbodhi does not ship physical goods. All educational content is provided digitally or at the institute location.
               </p>
             </section>
           </div>
@@ -51,12 +51,12 @@ const PrivacyPolicy = () => {
           <section className="pt-8 border-t">
             <h2 className="text-xl font-bold text-gray-900 mb-4 italic">Summary of Terms</h2>
             <p className="text-sm">
-              By enrolling in our programs, you agree to abide by our class schedules, payment terms, and student conduct policies. Misconduct or fee defaults may lead to termination of enrollment. Course material is for personal use only and may not be redistributed. Roots Classes reserves the right to change schedules, faculty, and fees as needed.
+              By enrolling in our programs, you agree to abide by our class schedules, payment terms, and student conduct policies. Misconduct or fee defaults may lead to termination of enrollment. Course material is for personal use only and may not be redistributed. Yogbodhi reserves the right to change schedules, faculty, and fees as needed.
             </p>
           </section>
 
           <div className="pt-8 text-center text-sm text-gray-500">
-            Last updated: {new Date().toLocaleDateString()} | Roots Classes Portal
+            Last updated: {new Date().toLocaleDateString()} | Yogbodhi Portal
           </div>
         </div>
       </div>

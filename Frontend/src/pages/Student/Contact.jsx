@@ -127,12 +127,12 @@ const Contact = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { icon: '📞', label: 'Call Us', value: '+91 98775-15330', hint: 'Mon–Sat, 9am–6pm', bg: 'hover:border-yellow-200 hover:bg-yellow-50', accent: 'text-[#ba9d25]', href: 'tel:+919877515330' },
-              { icon: '✉️', label: 'Email Us', value: 'rootsclasses1313@gmail.com', hint: 'We reply within 24h', bg: 'hover:border-blue-200 hover:bg-blue-50', accent: 'text-[#0078FF]', href: 'mailto:rootsclasses1313@gmail.com?subject=Root%20classes%20enquiry&body=Hi%2C%20I%20wanted%20to%20enquire%20about...' },
+              { icon: '✉️', label: 'Email Us', value: 'yogbodhiofficial@gmail.com', hint: 'We reply within 24h', bg: 'hover:border-blue-200 hover:bg-blue-50', accent: 'text-[#0078FF]', href: 'mailto:yogbodhiofficial@gmail.com?subject=Yogbodhi%20enquiry&body=Hi%2C%20I%20wanted%20to%20enquire%20about...' },
               { icon: '💬', label: 'WhatsApp', value: 'Chat with us', hint: 'Quick responses', bg: 'hover:border-green-200 hover:bg-green-50', accent: 'text-green-600', href: 'https://wa.me/919877515330' },
             ].map(item => (
               <a key={item.label} 
                 href={item.label === 'Email Us' 
-                  ? `https://mail.google.com/mail/?view=cm&fs=1&to=rootsclasses1313@gmail.com&su=Root%20classes%20enquiry&body=Hi%2C%20I%20wanted%20to%20enquire%20about...`
+                  ? `https://mail.google.com/mail/?view=cm&fs=1&to=yogbodhiofficial@gmail.com&su=Yogbodhi%20enquiry&body=Hi%2C%20I%20wanted%20to%20enquire%20about...`
                   : item.href
                 }
                 onClick={async (e) => {
@@ -188,7 +188,7 @@ const Contact = () => {
                 <p className="text-sm text-gray-500 leading-relaxed">
                   Gill Rd, opp. ITI College,<br />Shilapuri, Ludhiana,<br />Punjab — 141003
                 </p>
-                <a href="https://maps.google.com/?q=Roots+Classes+Ludhiana" target="_blank" rel="noopener noreferrer"
+                <a href="https://maps.google.com/?q=Yogbodhi+Ludhiana" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-[#0078FF] hover:underline">
                   Open in Maps →
                 </a>
@@ -380,8 +380,8 @@ const Contact = () => {
             {/* Map embed */}
             <div className="lg:col-span-8 rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-72">
               <iframe
-                title="Roots Classes Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3418.0!2d75.85!3d30.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRoots+Classes+Ludhiana!5e0!3m2!1sen!2sin!4v1"
+                title="Yogbodhi Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3418.0!2d75.85!3d30.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sYogbodhi+Ludhiana!5e0!3m2!1sen!2sin!4v1"
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

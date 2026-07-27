@@ -69,8 +69,8 @@ const ErrorPage = () => {
 
         {/* Footer Brand */}
         <div className="mt-16 pt-8 border-t border-gray-50 flex items-center justify-center gap-3">
-           <img src="/logo.svg" alt="Roots" className="h-5 w-auto grayscale opacity-30" />
-           <p className="text-[9px] font-black text-gray-300 uppercase tracking-[0.4em]">Roots Systems</p>
+           <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-5 w-auto grayscale opacity-30" />
+           <p className="text-[9px] font-black text-gray-300 uppercase tracking-[0.4em]">Yogbodhi Systems</p>
         </div>
       </div>
     </div>

@@ -55,7 +55,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-1 text-center md:text-left flex flex-col items-center md:items-start">
             <Link to="/" className="inline-block mb-6">
-              <img src="/assets/yogbodhi.png" alt="Roots Classes Logo" className="h-17 w-full drop-shadow-xl" />
+              <img src="/assets/yogbodhi.png" alt="Yogbodhi Logo" className="h-17 w-full drop-shadow-xl" />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-xs text-balance">
               Empowering learners worldwide with premium educational resources, interactive tutorials, and expert-led courses.

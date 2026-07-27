@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 const sendOTP = async (email, otp) => {
     try {
         const mailOptions = {
-            from: `"Roots Classes" <${process.env.EMAIL_USER}>`,
+            from: `"Yogbodhi" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: 'Your OTP Code',
             html: `
@@ -43,9 +43,9 @@ const sendCallbackEmail = async (userData) => {
         const { firstName, lastName, mobileNumber, email, stream, studentClass } = userData;
 
         const mailOptions = {
-            from: `"Roots Classes Portal" <${process.env.EMAIL_USER}>`,
-            to: "rootsclasses1313@gmail.com",
-            subject: 'New Expert Advice Request - Roots Classes',
+            from: `"Yogbodhi Portal" <${process.env.EMAIL_USER}>`,
+            to: "yogbodhiofficial@gmail.com",
+            subject: 'New Expert Advice Request - Yogbodhi',
             html: `
                 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden;">
                     <div style="background-color: #4F46E5; padding: 20px; text-align: center;">
@@ -75,7 +75,7 @@ const sendCallbackEmail = async (userData) => {
                         
                         <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 30px 0;" />
                         <p style="text-align: center; color: #9ca3af; font-size: 12px;">
-                            RootsClasses Portal • Automated Notification
+                            Yogbodhi Portal • Automated Notification
                         </p>
                     </div>
                 </div>
@@ -97,8 +97,8 @@ const sendContactEmail = async (userData) => {
         const { name, email, subject, message } = userData;
 
         const mailOptions = {
-            from: `"Roots Classes Contact" <${process.env.EMAIL_USER}>`,
-            to: "rootsclasses1313@gmail.com",
+            from: `"Yogbodhi Contact" <${process.env.EMAIL_USER}>`,
+            to: "yogbodhiofficial@gmail.com",
             subject: `Contact Form: ${subject}`,
             html: `
                 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden;">
@@ -112,7 +112,7 @@ const sendContactEmail = async (userData) => {
                         <p style="white-space: pre-wrap;">${message}</p>
                         <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
                         <p style="text-align: center; color: #9ca3af; font-size: 12px;">
-                            RootsClasses Portal • Contact Form Submission
+                            Yogbodhi Portal • Contact Form Submission
                         </p>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ const sendContactEmail = async (userData) => {
  const sendReceiptEmail = async (student, enrollment, course, filePath) => {
   try {
     const mailOptions = {
-      from: `"Roots Classes" <${process.env.EMAIL_USER}>`,
+      from: `"Yogbodhi" <${process.env.EMAIL_USER}>`,
       to: student.email,
       subject: "Payment Successful - Course Enrollment Confirmation 🎉",
       html: `
@@ -182,13 +182,13 @@ const sendContactEmail = async (userData) => {
           
           <p style="margin-top: 30px;">Please find your payment receipt attached with this email.</p>
           
-          <p style="margin-top: 20px;">Thank you for choosing Roots Classes! 🚀</p>
+          <p style="margin-top: 20px;">Thank you for choosing Yogbodhi! 🚀</p>
           
           <hr style="margin: 30px 0 20px 0;" />
           
           <p style="font-size: 12px; color: #888; text-align: center;">
             This is an automated email. Please do not reply.<br />
-            For any assistance, contact us at support@rootsclasses.com
+            For any assistance, contact us at support@yogbodhi.com
           </p>
         </div>
       `,

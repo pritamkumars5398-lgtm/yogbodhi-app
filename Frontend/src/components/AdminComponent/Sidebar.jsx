@@ -128,10 +128,10 @@ const AdminSidebar = ({ isMobileOpen, setIsMobileOpen }) => {
         {/* Brand Header */}
         <div className="p-6 border-b border-gray-50">
           <Link to={userData.role === 'admin' ? '/admin' : userData.role === 'instructor' ? '/instructor/dashboard' : '/'} onClick={() => setIsMobileOpen(false)} className="flex items-center gap-3">
-             <img src="/logo.svg" alt="Roots" className="h-8 w-auto flex-shrink-0" />
+             <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-8 w-auto flex-shrink-0" />
              {!isCollapsed && (
                <div className="animate-fadeIn">
-                  <h1 className="text-sm font-black text-gray-900 leading-none">Roots Classes</h1>
+                  <h1 className="text-sm font-black text-gray-900 leading-none">Yogbodhi</h1>
                   <p className="text-[9px] font-bold text-[#ba9d25] uppercase tracking-widest mt-1">{getDashboardTitle()}</p>
                </div>
              )}

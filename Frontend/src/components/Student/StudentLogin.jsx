@@ -349,7 +349,7 @@ const LoginPage = () => {
                 <div>
                   <div className="mb-10">
                     <div className="flex items-center gap-3">
-                      <img src="/logo.svg" alt="Roots Classes" className="h-10 w-auto" />
+                      <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-10 w-auto" />
                       <div className="h-6 w-[1px] bg-gray-200" />
                       <span className="text-xs font-black text-gray-400 uppercase tracking-widest">Portal</span>
                     </div>
@@ -420,7 +420,7 @@ const LoginPage = () => {
 
                 <div className="flex justify-between items-center text-[10px] font-black text-gray-400 uppercase tracking-widest mt-5">
                   <Link to="/register" className="hover:text-gray-900 transition-colors">No account? <span className="text-[#0078FF] border-b border-[#0078FF]">Register</span></Link>
-                  <Link to="/" className="hover:text-gray-900 transition-colors">Roots Classes © 2026</Link>
+                  <Link to="/" className="hover:text-gray-900 transition-colors">Yogbodhi © 2026</Link>
                 </div>
               </>
             ) : (

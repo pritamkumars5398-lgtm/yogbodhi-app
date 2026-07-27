@@ -28,7 +28,7 @@ const tiers = [
 
 const steps = [
   { num: '01', title: 'Register Online', desc: 'Fill in the application form below with your details and select your program.', accent: '#ba9d25' },
-  { num: '02', title: 'Appear for Test', desc: 'Attend the Roots Scholarship Test (RST) — conducted online or at our Ludhiana center.', accent: '#0078FF' },
+  { num: '02', title: 'Appear for Test', desc: 'Attend the Yogbodhi Scholarship Test (YST) — conducted online or at our Ludhiana center.', accent: '#0078FF' },
   { num: '03', title: 'Get Your Result', desc: 'Results announced within 3 working days. Check your email for the scorecard.', accent: '#ba9d25' },
   { num: '04', title: 'Confirm Admission', desc: 'Finalise enrollment with the applicable scholarship discount and join the batch.', accent: '#0078FF' },
 ];
@@ -324,7 +324,7 @@ const ScholarshipForm = () => {
           <div className="mt-6 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex items-start gap-4">
             <span className="text-xl flex-shrink-0">ℹ️</span>
             <p className="text-sm text-blue-700 leading-relaxed">
-              <strong>Note:</strong> The Roots Scholarship Test (RST) is conducted online and at our Ludhiana centre. Registration is completely free. Scholarship is applied directly on the admission fee — no reimbursement process.
+              <strong>Note:</strong> The Yogbodhi Scholarship Test (YST) is conducted online and at our Ludhiana centre. Registration is completely free. Scholarship is applied directly on the admission fee — no reimbursement process.
             </p>
           </div>
         </div>
@@ -372,8 +372,8 @@ const ScholarshipForm = () => {
                 <div className="bg-gray-50 border-b border-gray-100 px-8 py-6 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-40 h-40 bg-[#ba9d25]/5 rounded-full blur-3xl pointer-events-none" />
                   <div className="relative">
-                    <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-widest mb-1">RST Application</p>
-                    <h3 className="text-xl font-bold text-gray-900">Roots Scholarship Test</h3>
+                    <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-widest mb-1">YST Application</p>
+                    <h3 className="text-xl font-bold text-gray-900">Yogbodhi Scholarship Test</h3>
                     <p className="text-gray-500 text-xs mt-1">Free registration · Takes 3 minutes</p>
                   </div>
                 </div>
@@ -473,7 +473,7 @@ const ScholarshipForm = () => {
                       <div className="flex items-start gap-3 py-2">
                         <input type="checkbox" id="sch-terms" required className="mt-0.5 w-4 h-4 accent-[#ba9d25]" />
                         <label htmlFor="sch-terms" className="text-xs text-gray-500 leading-relaxed">
-                          I agree to receive test information and scholarship updates via WhatsApp/Email. I accept Roots Classes{' '}
+                          I agree to receive test information and scholarship updates via WhatsApp/Email. I accept Yogbodhi{' '}
                           <a href="/termsandconditions" className="text-[#ba9d25] hover:underline">Terms & Conditions</a>.
                         </label>
                       </div>

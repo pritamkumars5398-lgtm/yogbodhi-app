@@ -148,7 +148,7 @@ const Blog = () => {
       {/* Refined Header */}
       <section className="bg-gray-50 border-b border-gray-100 pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-[0.3em] mb-4">The Roots Blog</p>
+          <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-[0.3em] mb-4">The Yogbodhi Blog</p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Expert Insights & <span className="text-[#0078FF]">Guidance</span></h1>
           <p className="text-gray-500 max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed">
             Stay updated with the latest in competitive exams, effective study techniques, and success stories from our top performers.
@@ -176,8 +176,8 @@ const Blog = () => {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${activeCategory === cat
-                  ? 'bg-[#0078FF] text-white shadow-lg shadow-blue-500/20'
-                  : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
+                ? 'bg-[#0078FF] text-white shadow-lg shadow-blue-500/20'
+                : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
                 }`}
             >
               {cat}

@@ -22,9 +22,9 @@ export const generateReceipt = (filePath, data) => {
       doc.fontSize(10)
          .font('Helvetica')
          .fillColor('#666666')
-         .text('Roots Classes', { align: 'center' })
+         .text('Yogbodhi', { align: 'center' })
          .text('Your Institute Address', { align: 'center' })
-         .text('contact@rootsclasses.com | +91 1234567890', { align: 'center' });
+         .text('contact@yogbodhi.com | +91 1234567890', { align: 'center' });
       
       doc.moveDown(2);
       

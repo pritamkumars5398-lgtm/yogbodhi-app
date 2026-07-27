@@ -44,7 +44,7 @@ const StudentRegistration = () => {
           <div>
             <div className="mb-6 flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <img src="/logo.svg" alt="Roots Classes" className="h-8 w-auto" />
+                <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-8 w-auto" />
                 <div className="h-4 w-[1px] bg-gray-200" />
                 <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Step {step}/3</span>
               </div>
@@ -55,7 +55,7 @@ const StudentRegistration = () => {
 
             <div className="mb-8">
               <h1 className="text-3xl font-bold text-gray-900 mb-2 tracking-tight">Create account</h1>
-              <p className="text-sm text-gray-400">Join the Roots Classes community.</p>
+              <p className="text-sm text-gray-400">Join the Yogbodhi community.</p>
             </div>
 
             <form onSubmit={handleRegister} className="space-y-5">

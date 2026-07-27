@@ -14,7 +14,7 @@ const WhyChooseUs = () => (
 
         {/* Left sticky */}
         <div className="lg:col-span-4 lg:sticky lg:top-28">
-          <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-widest mb-3">Why Roots Classes</p>
+          <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-widest mb-3">Why Yogbodhi</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
             Everything you need to
             <span className="block mt-1 relative w-fit">

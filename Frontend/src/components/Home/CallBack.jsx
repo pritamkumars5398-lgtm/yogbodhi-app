@@ -148,7 +148,7 @@ const ExpertConsultationForm = () => {
                 <div className="flex items-start gap-3">
                   <input type="checkbox" id="terms" required className="mt-0.5 w-4 h-4 accent-[#ba9d25] border-gray-300 rounded" />
                   <label htmlFor="terms" className="text-xs text-gray-500">
-                    By submitting, I agree to receive WhatsApp communication and accept Roots Classes'{' '}
+                    By submitting, I agree to receive WhatsApp communication and accept Yogbodhi'{' '}
                     <a href="/termsandconditions" className="text-[#ba9d25] hover:underline">T&C</a> &{' '}
                     <a href="/privacypolicy" className="text-[#ba9d25] hover:underline">Privacy Policy</a>.
                   </label>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const faqs = [
-  { q: 'What courses does Roots Classes offer?', a: 'We offer Foundation (Class 8–10), Medical (NEET), and Engineering (IIT-JEE) programs — both classroom and online. Each includes live classes, recordings, test series, and doubt sessions.' },
+  { q: 'What courses does Yogbodhi offer?', a: 'We offer Foundation (Class 8–10), Medical (NEET), and Engineering (IIT-JEE) programs — both classroom and online. Each includes live classes, recordings, test series, and doubt sessions.' },
   { q: 'How are the online classes conducted?', a: 'Live via our platform with recordings available 24/7. You also get PDF notes, practice sheets, and weekly tests included.' },
   { q: 'Is there an EMI option for course fees?', a: 'Yes — flexible monthly installment plans are available. Contact our counselors for a plan that fits your budget.' },
   { q: 'How do I enroll in a course?', a: 'Enroll directly on the website, visit our Ludhiana center, or call +91 98775-15330 for assisted enrollment.' },

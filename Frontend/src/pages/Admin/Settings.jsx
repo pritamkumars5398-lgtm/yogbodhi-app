@@ -53,7 +53,7 @@ const Settings = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/student/edit-profile-details`, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/student/edit-profile-details`, {
         studentId: student._id,
         fullName: formData.fullName,
         email: formData.email,
@@ -80,7 +80,7 @@ const Settings = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/student/reset-password`, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/student/reset-password`, {
         email: student.email,
         newPassword: formData.newPassword,
         confirmPassword: formData.confirmPassword

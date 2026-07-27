@@ -21,7 +21,7 @@ const SliderPage = () => {
       desktopImage: fallbackImage,
       tabletImage: fallbackImage,
       mobileImage: fallbackImage,
-      title: "Roots Classes",
+      title: "Yogbodhi",
       subtitle: "Empowering Your Future with Quality Education",
       buttonText: "Explore Courses",
       classText: "Join the Journey"

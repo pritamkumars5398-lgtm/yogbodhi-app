@@ -113,7 +113,7 @@ const Navbar = () => {
 
             {/* Logo */}
             <Link to="/" className="flex items-center flex-shrink-0">
-              <img src="/assets/yogbodhi.png" alt="Roots Classes" className="h-15 w-auto ml-2" />
+              <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-15 w-auto ml-2" />
             </Link>
 
             {/* Desktop nav */}
