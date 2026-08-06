@@ -15,6 +15,16 @@ import TermsAndConditions from "../pages/TermsAndConditions";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TopicInfo from "../pages/Student/Course/Topicinfo";
 
+// Learning Systems pages
+import CEP from "../pages/Student/CEP";
+import ALS from "../pages/Student/ALS";
+import CLS from "../pages/Student/CLS";
+import EnquiryForm from "../pages/Student/EnquiryForm";
+import FacultyProfile from "../pages/Student/FacultyProfile";
+import CertificateVerification from "../pages/Student/CertificateVerification";
+import StudentDashboard from "../pages/Student/StudentDashboard";
+import About from "../pages/Student/About";
+import Schools from "../pages/Student/Schools";
 
 const StudentRoutes = [
 
@@ -34,6 +44,46 @@ const StudentRoutes = [
             {
                 path: "",
                 element: <Home />,
+            },
+            {
+                path: "/about",
+                element: <About />,
+            },
+            {
+                path: "/schools",
+                element: <Schools />,
+            },
+            {
+                path: "/cep",
+                element: <CEP />,
+            },
+            {
+                path: "/als",
+                element: <ALS />,
+            },
+            {
+                path: "/cls",
+                element: <CLS />,
+            },
+            {
+                path: "/enquiry",
+                element: <EnquiryForm />,
+            },
+            {
+                path: "/partnerships",
+                element: <EnquiryForm />,
+            },
+            {
+                path: "/faculty",
+                element: <FacultyProfile />,
+            },
+            {
+                path: "/verify-certificate",
+                element: <CertificateVerification />,
+            },
+            {
+                path: "/dashboard",
+                element: <StudentDashboard />,
             },
             {
                 path: "/course",

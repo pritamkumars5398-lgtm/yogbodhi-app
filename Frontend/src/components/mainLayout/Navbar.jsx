@@ -6,22 +6,37 @@ import { SiCoursera } from 'react-icons/si';
 import NotificationDropdown from '../Notification/NotificationDropdown';
 
 const navItems = [
-  { name: 'Courses', path: '/course' },
-  { name: '100% Scholarship', path: '/scholarship' },
-  { name: 'Test Series', path: '/test' },
-  { name: 'Blog', path: '/blog' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Home', path: '/' },
+  { name: 'About YGI', path: '/about' },
+  {
+    name: 'Learning Systems',
+    dropdown: [
+      { name: 'Continuing Education Programme', path: '/cep' },
+      { name: 'Alternative Learning System', path: '/als' },
+      { name: 'Complementary Learning System', path: '/cls' }
+    ]
+  },
+  { name: 'Schools & Institutes', path: '/schools' },
+  { name: 'Programmes', path: '/course' },
+  { name: 'Admissions', path: '/enquiry?subject=admission' },
+  { name: 'Faculty & Mentors', path: '/faculty' },
+  { name: 'Research & Publications', path: '/blog' },
+  { name: 'Partnerships', path: '/partnerships' },
+  { name: 'Student Support', path: '/dashboard' },
+  { name: 'Contact', path: '/contact' }
 ];
 
 const Navbar = () => {
   const { student, logout, setStudent } = useStudentStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isLearningOpen, setIsLearningOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dropdownRef = useRef(null);
+  const learningDropdownRef = useRef(null);
 
   /* scroll shadow */
   useEffect(() => {
@@ -47,7 +62,10 @@ const Navbar = () => {
 
   /* click outside */
   useEffect(() => {
-    const h = (e) => { if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsDropdownOpen(false); };
+    const h = (e) => { 
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsDropdownOpen(false); 
+      if (learningDropdownRef.current && !learningDropdownRef.current.contains(e.target)) setIsLearningOpen(false); 
+    };
     document.addEventListener('mousedown', h);
     return () => document.removeEventListener('mousedown', h);
   }, []);
@@ -109,27 +127,56 @@ const Navbar = () => {
       {/* Main Navbar */}
       <nav className={`bg-white/70 backdrop-blur-md transition-shadow duration-200 ${scrolled ? 'shadow-[10_1px_240px_rgba(0,0,0,0.08)]' : 'border-b border-gray-100'}`}>
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-2">
-          <div className="flex justify-between items-center h-18">
+          <div className="flex justify-between items-center h-20">
 
             {/* Logo */}
             <Link to="/" className="flex items-center flex-shrink-0">
-              <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-15 w-auto ml-2" />
+              <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-16 w-auto ml-2" />
             </Link>
 
             {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-3">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${isActive(item.path)
-                    ? 'text-[#ba9d25] bg-yellow-50 shadow-lg'
-                    : 'text-gray-600 hover:text-[#ba9d25] hover:bg-yellow-50/50 hover:shadow-lg'
-                    }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+            <div className="hidden md:flex items-center gap-1 xl:gap-1.5">
+              {navItems.map((item) => {
+                if (item.dropdown) {
+                  return (
+                    <div key={item.name} className="relative" ref={learningDropdownRef}>
+                      <button
+                        onClick={() => setIsLearningOpen(!isLearningOpen)}
+                        className="px-2.5 py-2.5 rounded-lg text-[11px] xl:text-xs font-semibold transition-all duration-300 flex items-center gap-0.5 text-gray-600 hover:text-[#ba9d25] hover:bg-yellow-50/50 hover:shadow-lg"
+                      >
+                        {item.name}
+                        <ChevronDown size={12} className={`transition-transform ${isLearningOpen ? 'rotate-180 text-[#ba9d25]' : ''}`} />
+                      </button>
+                      {isLearningOpen && (
+                        <div className="absolute left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
+                          {item.dropdown.map((subItem) => (
+                            <Link
+                              key={subItem.name}
+                              to={subItem.path}
+                              onClick={() => setIsLearningOpen(false)}
+                              className={`block px-4 py-2.5 text-xs transition-colors text-gray-700 hover:bg-yellow-50 hover:text-[#ba9d25] ${isActive(subItem.path) ? 'text-[#ba9d25] font-semibold bg-yellow-50/60' : ''}`}
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className={`px-2.5 py-2.5 rounded-lg text-[11px] xl:text-xs font-semibold transition-all duration-300 ${isActive(item.path)
+                      ? 'text-[#ba9d25] bg-yellow-50 shadow-md font-bold'
+                      : 'text-gray-600 hover:text-[#ba9d25] hover:bg-yellow-50/50 hover:shadow-lg'
+                      }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Desktop actions */}
@@ -222,15 +269,34 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full right-0 w-[100%] border-t border-gray-100 bg-white shadow-2xl">
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
-              {navItems.map((item) => (
-                <Link key={item.name} to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive(item.path) ? 'text-[#ba9d25] bg-yellow-50' : 'text-gray-600 hover:bg-gray-50'
-                    }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                if (item.dropdown) {
+                  return (
+                    <div key={item.name} className="flex flex-col gap-1 pl-4 border-l-2 border-yellow-200 my-1">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 py-1">{item.name}</span>
+                      {item.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.name}
+                          to={subItem.path}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${isActive(subItem.path) ? 'text-[#ba9d25] bg-yellow-50 font-semibold' : 'text-gray-600 hover:bg-gray-50'}`}
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  );
+                }
+                return (
+                  <Link key={item.name} to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive(item.path) ? 'text-[#ba9d25] bg-yellow-50' : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
 
               <div className="mt-2 pt-3 border-t border-gray-100">
                 {isLoggedIn ? (

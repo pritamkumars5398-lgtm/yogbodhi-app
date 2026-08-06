@@ -1126,6 +1126,72 @@ const CourseDetails = () => {
               )}
             </div>
 
+            {/* Course-management Specifications Card */}
+            <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm space-y-4">
+              <h3 className="text-base font-bold text-gray-900 flex items-center gap-2 pb-2 border-b border-gray-100">
+                <Info size={18} className="text-yellow-600" />
+                Programme Details
+              </h3>
+              <div className="space-y-3 text-xs">
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Learning Segment</span>
+                  <span className="text-gray-900 font-bold">{course.learningSegment || 'CEP'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">School</span>
+                  <span className="text-gray-900 font-bold text-right max-w-[150px] truncate">{course.school || 'School of Wellness'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Institute</span>
+                  <span className="text-gray-900 font-bold text-right max-w-[150px] truncate">{course.institute || 'Yogbodhi Global'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Subject Category</span>
+                  <span className="text-gray-900 font-bold text-right max-w-[150px] truncate">{course.category?.name || 'General'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Programme Level</span>
+                  <span className="text-gray-900 font-bold capitalize">{course.level || 'Intermediate'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Learning Mode</span>
+                  <span className="text-gray-900 font-bold">{course.mode || 'Hybrid'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Duration</span>
+                  <span className="text-gray-900 font-bold">{course.duration || '6 Weeks'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Eligibility</span>
+                  <span className="text-gray-900 font-bold text-right max-w-[150px] truncate" title={course.eligibility || 'Graduates / Professionals'}>{course.eligibility || 'Graduates'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Programme Fee</span>
+                  <span className="text-gray-900 font-bold">{course.price > 0 ? `₹${course.price.toLocaleString('en-IN')}` : 'Free'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Faculty / Mentor</span>
+                  <span className="text-gray-900 font-bold text-right max-w-[150px] truncate">{course.faculty || instructor.name}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Start Date</span>
+                  <span className="text-gray-900 font-bold">{course.startDate || 'Immediate'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Application Deadline</span>
+                  <span className="text-gray-900 font-bold">{course.applicationDeadline || 'Rolling'}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-gray-50">
+                  <span className="text-gray-400 font-medium">Certification Type</span>
+                  <span className="text-gray-900 font-bold text-right max-w-[150px] truncate" title={course.certificationType || 'Certificate of Completion'}>{course.certificationType || 'Certificate of Completion'}</span>
+                </div>
+                <div className="flex justify-between py-1">
+                  <span className="text-gray-400 font-medium">Course Status</span>
+                  <span className="text-green-600 font-bold uppercase tracking-wider text-[10px] bg-green-50 px-2 py-0.5 rounded-full">{course.status || 'Active'}</span>
+                </div>
+              </div>
+            </div>
+
             {/* INSTRUCTOR CARD - Now in sidebar */}
             <div className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
               <h3 className="text-base font-bold text-gray-900 mb-4 flex items-center gap-2">

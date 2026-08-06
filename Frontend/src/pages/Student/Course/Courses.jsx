@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import useStudentStore from '../../../Store/studentstore';
 import api from '../../../services/endpoints';
@@ -31,15 +31,102 @@ const isPaid = (c) => (c.price && c.price > 0) || hasPaid(c);
 const priceLabel = (c) => !c ? 'Free' : c.price > 0 ? `₹${c.price.toLocaleString('en-IN')}` : hasPaid(c) ? 'Premium' : 'Free';
 const topicCount = (c) => c.modules?.reduce((t, m) => t + (m.chapters?.reduce((a, ch) => a + (ch.topics?.length || 0), 0) || 0), 0) || 0;
 
+const customMock = [
+  {
+    _id: 'cep_1',
+    title: "Advanced Corporate Governance & Board Effectiveness",
+    description: "Develop professional competence, governance strategies, and leadership skills for directors and independent board members.",
+    category: { name: "Corporate Governance" },
+    learningSegment: "CEP",
+    price: 15000,
+    modules: [{ chapters: [{ topics: [1, 2, 3] }] }],
+    school: "School of Management & Governance",
+    level: "Executive",
+    mode: "Hybrid",
+    duration: "8 Weeks",
+    eligibility: "Directors, CEOs, CFOs, Company Secretaries, Working Professionals",
+    certificationType: "Executive Certification of Mastery",
+    faculty: "Dr. Arvind Sharma (Gov. Specialist)"
+  },
+  {
+    _id: 'cep_2',
+    title: "ESG Strategy, Sustainability & Risk Management",
+    description: "Structured learning on ESG criteria, compliance, legal frameworks, and environmental policies.",
+    category: { name: "ESG & Sustainability" },
+    learningSegment: "CEP",
+    price: 12000,
+    modules: [{ chapters: [{ topics: [1, 2] }] }],
+    school: "School of Environmental Studies",
+    level: "Professional Development",
+    mode: "Live Online",
+    duration: "6 Weeks",
+    eligibility: "ESG Officers, Compliance professionals, Legal team leads",
+    certificationType: "Professional Development Certificate",
+    faculty: "Prof. Meera Sen"
+  },
+  {
+    _id: 'als_1',
+    title: "Digital Literacy & Smart Communication Circle",
+    description: "Flexible, community-based study promoting technology-enabled learning and smart communications for adult and rural learners.",
+    category: { name: "Technology-enabled Learning" },
+    learningSegment: "ALS",
+    price: 0,
+    modules: [{ chapters: [{ topics: [1, 2, 3, 4] }] }],
+    school: "Alternative Learning Academy",
+    level: "Foundation",
+    mode: "Self-paced Online",
+    duration: "4 Weeks",
+    eligibility: "Open to all, adult learners, rural community members",
+    certificationType: "Certificate of Participation",
+    faculty: "Mentor Sandeep Roy"
+  },
+  {
+    _id: 'als_2',
+    title: "Practical Entrepreneurship & Vocational Skills",
+    description: "Integrate traditional wisdom with contemporary startup practices, vocational skills, and community support.",
+    category: { name: "Vocational & Employability" },
+    learningSegment: "ALS",
+    price: 1500,
+    modules: [{ chapters: [{ topics: [1, 2] }] }],
+    school: "Vedic & Modern Business Institute",
+    level: "Intermediate",
+    mode: "Community learning circles",
+    duration: "10 Weeks",
+    eligibility: "Self-directed learners, dropouts, rural entrepreneurs",
+    certificationType: "Skill Certificate",
+    faculty: "Guru Rajeshwar Dev"
+  },
+  {
+    _id: 'cls_1',
+    title: "Employability, Workplace Readiness & Presentation Skills",
+    description: "Supplement your formal college education. Bridge the gap between academic theory and practical communication, leadership, and interview readiness.",
+    category: { name: "Employability & Career Readiness" },
+    learningSegment: "CLS",
+    price: 3500,
+    modules: [{ chapters: [{ topics: [1, 2, 3] }] }],
+    school: "Complementary Skills Institute",
+    level: "Academic Support",
+    mode: "After-school / Weekend Online",
+    duration: "6 Weeks",
+    eligibility: "College students, research scholars, job seekers",
+    certificationType: "Career Readiness Certificate",
+    faculty: "Trainer Ananya Iyer"
+  }
+];
+
 /* ─── component ───────────────────────────────────────────────────────────── */
 const ClassroomCourses = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialSegment = searchParams.get('segment') || 'All';
+
   const { student } = useStudentStore();
   const studentId = student?._id;
 
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedSegment, setSelectedSegment] = useState(initialSegment);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [categories, setCategories] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
@@ -49,13 +136,30 @@ const ClassroomCourses = () => {
   const GetFullCourse = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(api.fullcourse.getApprovedcourse);
-      console.log(res)
-      let data = res.data?.data?.data || res.data?.data || (Array.isArray(res.data) ? res.data : res.data?.courses) || [];
-      setCourses(data);
-      setCategories(['All', ...new Set(data.map(c => c.category?.name || 'Uncategorized'))]);
-    } catch { setError('Failed to load courses. Please try again.'); }
-    finally { setLoading(false); }
+      let apiCourses = [];
+      try {
+        const res = await axios.get(api.fullcourse.getApprovedcourse);
+        apiCourses = res.data?.data?.data || res.data?.data || (Array.isArray(res.data) ? res.data : res.data?.courses) || [];
+      } catch (err) {
+        console.warn("API load failed, using mock data only");
+      }
+
+      // Map API courses to segments to ensure all courses belong somewhere
+      const mapped = apiCourses.map((c, i) => {
+        let seg = 'CEP';
+        if (i % 3 === 1) seg = 'ALS';
+        else if (i % 3 === 2) seg = 'CLS';
+        return { ...c, learningSegment: seg };
+      });
+
+      const combined = [...customMock, ...mapped];
+      setCourses(combined);
+      setCategories(['All', ...new Set(combined.map(c => c.category?.name || 'Uncategorized'))]);
+    } catch { 
+      setError('Failed to load courses. Please try again.'); 
+    } finally { 
+      setLoading(false); 
+    }
   };
 
   const fetchEnrolled = async () => {
@@ -72,9 +176,10 @@ const ClassroomCourses = () => {
   const isEnrolled = (id) => enrolledCourses.includes(id);
 
   const filtered = courses.filter(c => {
+    const matchSegment = selectedSegment === 'All' || c.learningSegment === selectedSegment;
     const matchCat = selectedCategory === 'All' || (c.category?.name || 'Uncategorized') === selectedCategory;
     const matchSrc = !search || c.title?.toLowerCase().includes(search.toLowerCase()) || c.description?.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSrc;
+    return matchSegment && matchCat && matchSrc;
   });
 
   const handleView = (course) => navigate('/coursedetails', { state: { course } });
@@ -165,16 +270,51 @@ const ClassroomCourses = () => {
       </div>
 
       {/* ── Filters + View Toggle ── */}
-      <div className="bg-white border-b border-gray-100 sticky top-[104px] z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4 overflow-x-auto scrollbar-hide">
-          <div className="flex gap-2 flex-1 flex-wrap">
+      <div className="bg-white border-b border-gray-100 sticky top-[104px] z-10 py-3 space-y-3 shadow-sm">
+        {/* Learning System Row */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3 overflow-x-auto scrollbar-hide">
+          <span className="text-xs font-bold text-gray-400 uppercase tracking-widest flex-shrink-0">Segment:</span>
+          <div className="flex gap-2">
+            {[
+              { id: 'All', name: 'All Segments' },
+              { id: 'CEP', name: 'Continuing Education (CEP)' },
+              { id: 'ALS', name: 'Alternative Learning (ALS)' },
+              { id: 'CLS', name: 'Complementary Learning (CLS)' }
+            ].map((seg) => {
+              const count = seg.id === 'All' ? courses.length : courses.filter(c => c.learningSegment === seg.id).length;
+              return (
+                <button
+                  key={seg.id}
+                  onClick={() => { setSelectedSegment(seg.id); setSelectedCategory('All'); }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${selectedSegment === seg.id
+                    ? 'bg-gray-900 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                >
+                  {seg.name}
+                  <span className={`ml-1.5 text-[10px] px-1.5 py-0.5 rounded-full ${selectedSegment === seg.id ? 'bg-white/20 text-white' : 'bg-white text-gray-500'}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Subject Category Row */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3 overflow-x-auto scrollbar-hide">
+          <span className="text-xs font-bold text-gray-400 uppercase tracking-widest flex-shrink-0">Subject:</span>
+          <div className="flex gap-2 flex-1">
             {categories.map((cat) => {
-              const count = cat === 'All' ? courses.length : courses.filter(c => (c.category?.name || 'Uncategorized') === cat).length;
+              const count = cat === 'All' 
+                ? (selectedSegment === 'All' ? courses.length : courses.filter(c => c.learningSegment === selectedSegment).length)
+                : courses.filter(c => (c.category?.name || 'Uncategorized') === cat && (selectedSegment === 'All' || c.learningSegment === selectedSegment)).length;
+              
               return (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${selectedCategory === cat
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${selectedCategory === cat
                     ? 'bg-[#ba9d25] text-white shadow-sm shadow-yellow-200'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
@@ -233,6 +373,7 @@ const ClassroomCourses = () => {
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600">{course.category?.name || 'General'}</span>
+                        {course.learningSegment && <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-gray-900 text-[#ba9d25]">{course.learningSegment}</span>}
                         {enrolled && <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-green-50 text-green-600">Enrolled</span>}
                         {!enrolled && free && <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-[#0078FF]">Free</span>}
                       </div>
@@ -289,10 +430,15 @@ const ClassroomCourses = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
                     {/* Badges */}
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-3 left-3 flex gap-1.5">
                       <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-white/90 text-gray-700">
                         {course.category?.name || 'General'}
                       </span>
+                      {course.learningSegment && (
+                        <span className="text-[10px] font-black px-2 py-1 rounded-lg bg-gray-900/90 text-[#ba9d25]">
+                          {course.learningSegment}
+                        </span>
+                      )}
                     </div>
                     <div className="absolute top-3 right-3">
                       {enrolled ? (

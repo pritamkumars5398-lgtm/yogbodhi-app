@@ -57,8 +57,11 @@ const Footer = () => {
             <Link to="/" className="inline-block mb-6">
               <img src="/assets/yogbodhi.png" alt="Yogbodhi Logo" className="h-17 w-full drop-shadow-xl" />
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-xs text-balance">
-              Empowering learners worldwide with premium educational resources, interactive tutorials, and expert-led courses.
+            <p className="text-gray-300 text-sm font-bold leading-relaxed mb-2 max-w-xs">
+              A Global Platform for Continuing, Alternative and Complementary Learning
+            </p>
+            <p className="text-gray-400 text-xs leading-relaxed mb-6 max-w-xs">
+              Connecting professional education, flexible learning, practical skills, traditional wisdom and contemporary knowledge.
             </p>
             <div className="flex gap-4 justify-center md:justify-start">
               {socialLinks.map((social) => (
@@ -165,8 +168,15 @@ const Footer = () => {
 
         </div>
 
+        {/* Disclaimer row */}
+        <div className="border-t border-gray-800 pt-6 mt-8">
+          <p className="text-[11px] leading-relaxed text-gray-500 text-justify">
+            <span className="font-bold text-gray-400">Important Disclaimer:</span> Yogbodhi Global Institute is a multidisciplinary learning and professional-development platform offering continuing education, alternative learning and complementary learning programmes. Unless specifically stated otherwise, its programmes and certificates are intended for professional development, skill enhancement, continuing education and personal enrichment. They should not be represented as government-recognized degrees, university qualifications or statutory professional licences. Any programme offered in collaboration with a recognised university, professional body or authorised institution should separately display the name, role and recognition status of the collaborating institution.
+          </p>
+        </div>
+
         {/* Footer Bottom */}
-        <div className="border-t border-gray-800 pt-8 mt-2 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-gray-800 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs sm:text-sm text-gray-500 text-center md:text-left">
             © {currentYear} Yogbodhi Global. All rights reserved.
           </p>
