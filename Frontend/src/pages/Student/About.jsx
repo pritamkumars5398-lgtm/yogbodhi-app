@@ -27,7 +27,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Hero Banner */}
-      <section className="relative py-16 bg-cover bg-center overflow-hidden text-white" style={{ backgroundImage: "linear-gradient(to right, rgba(15, 23, 42, 0.95) 45%, rgba(15, 23, 42, 0.8) 100%), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80')" }}>
+      <section className="relative py-24 bg-cover bg-center overflow-hidden text-white" style={{ backgroundImage: "linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.7) 100%), url('/assets/schools_hero.jpg')" }}>
         <div className="absolute top-0 right-0 w-1/3 h-full bg-[#ba9d25]/10 rounded-l-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl mx-auto">
           <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#ba9d25]/20 text-[#ba9d25] border border-[#ba9d25]/30 uppercase tracking-widest">
