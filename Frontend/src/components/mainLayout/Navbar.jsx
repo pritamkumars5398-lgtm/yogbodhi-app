@@ -19,24 +19,29 @@ const navItems = [
   { name: 'Schools & Institutes', path: '/schools' },
   { name: 'Programmes', path: '/course' },
   { name: 'Admissions', path: '/enquiry?subject=admission' },
-  { name: 'Faculty & Mentors', path: '/faculty' },
-  { name: 'Research & Publications', path: '/blog' },
-  { name: 'Partnerships', path: '/partnerships' },
-  { name: 'Student Support', path: '/dashboard' },
-  { name: 'Contact', path: '/contact' }
+  {
+    name: 'More',
+    dropdown: [
+      { name: 'Faculty & Mentors', path: '/faculty' },
+      { name: 'Research & Publications', path: '/blog' },
+      { name: 'Partnerships', path: '/partnerships' },
+      { name: 'Student Support', path: '/dashboard' },
+      { name: 'Contact', path: '/contact' }
+    ]
+  }
 ];
 
 const Navbar = () => {
   const { student, logout, setStudent } = useStudentStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isLearningOpen, setIsLearningOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dropdownRef = useRef(null);
-  const learningDropdownRef = useRef(null);
+  const navContainerRef = useRef(null);
 
   /* scroll shadow */
   useEffect(() => {
@@ -64,7 +69,7 @@ const Navbar = () => {
   useEffect(() => {
     const h = (e) => { 
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsDropdownOpen(false); 
-      if (learningDropdownRef.current && !learningDropdownRef.current.contains(e.target)) setIsLearningOpen(false); 
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target)) setOpenDropdown(null); 
     };
     document.addEventListener('mousedown', h);
     return () => document.removeEventListener('mousedown', h);
@@ -135,25 +140,26 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-1 xl:gap-1.5">
+            <div className="hidden md:flex items-center gap-1 xl:gap-1.5" ref={navContainerRef}>
               {navItems.map((item) => {
                 if (item.dropdown) {
+                  const isOpen = openDropdown === item.name;
                   return (
-                    <div key={item.name} className="relative" ref={learningDropdownRef}>
+                    <div key={item.name} className="relative">
                       <button
-                        onClick={() => setIsLearningOpen(!isLearningOpen)}
+                        onClick={() => setOpenDropdown(isOpen ? null : item.name)}
                         className="px-2.5 py-2.5 rounded-lg text-[11px] xl:text-xs font-semibold transition-all duration-300 flex items-center gap-0.5 text-gray-600 hover:text-[#ba9d25] hover:bg-yellow-50/50 hover:shadow-lg"
                       >
                         {item.name}
-                        <ChevronDown size={12} className={`transition-transform ${isLearningOpen ? 'rotate-180 text-[#ba9d25]' : ''}`} />
+                        <ChevronDown size={12} className={`transition-transform ${isOpen ? 'rotate-180 text-[#ba9d25]' : ''}`} />
                       </button>
-                      {isLearningOpen && (
+                      {isOpen && (
                         <div className="absolute left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
                           {item.dropdown.map((subItem) => (
                             <Link
                               key={subItem.name}
                               to={subItem.path}
-                              onClick={() => setIsLearningOpen(false)}
+                              onClick={() => setOpenDropdown(null)}
                               className={`block px-4 py-2.5 text-xs transition-colors text-gray-700 hover:bg-yellow-50 hover:text-[#ba9d25] ${isActive(subItem.path) ? 'text-[#ba9d25] font-semibold bg-yellow-50/60' : ''}`}
                             >
                               {subItem.name}
