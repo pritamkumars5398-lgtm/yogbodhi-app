@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 const faqs = [
-  { q: 'What courses does Yogbodhi offer?', a: 'We offer Foundation (Class 8–10), Medical (NEET), and Engineering (IIT-JEE) programs — both classroom and online. Each includes live classes, recordings, test series, and doubt sessions.' },
-  { q: 'How are the online classes conducted?', a: 'Live via our platform with recordings available 24/7. You also get PDF notes, practice sheets, and weekly tests included.' },
-  { q: 'Is there an EMI option for course fees?', a: 'Yes — flexible monthly installment plans are available. Contact our counselors for a plan that fits your budget.' },
-  { q: 'How do I enroll in a course?', a: 'Enroll directly on the website, visit our Ludhiana center, or call +91 98775-15330 for assisted enrollment.' },
-  { q: 'Do you provide study material?', a: 'Yes — chapter-wise notes, DPPs, previous year papers, and formula booklets are provided to all enrolled students.' },
-  { q: 'Is there a scholarship program?', a: 'Yes — up to 100% scholarship based on a merit-cum-need test. Students from EWS backgrounds get additional concessions.' },
+  { q: 'What educational systems does Yogbodhi Global Institute offer?', a: 'Yogbodhi Global Institute provides three principal learning systems: Continuing Education Programme (CEP) for professionals & executives, Alternative Learning System (ALS) for flexible & community-based learning, and Complementary Learning System (CLS) for workplace skill enrichment.' },
+  { q: 'How are programmes conducted?', a: 'Programmes are delivered through technology-enabled digital modules, self-directed learning platforms, experiential workshops, and institutional study circles across our six academic schools.' },
+  { q: 'What qualifications or certificates are awarded?', a: 'Learners receive institutional certificates of completion, continuing education credits, and professional development credentials issued by Yogbodhi Global Institute and its constituent schools.' },
+  { q: 'How do I submit an institutional enquiry or register?', a: 'Submit an enquiry directly via our online Enquiry Desk, connect with our academic counsellors, or email info@yogbodhi.in.' },
+  { q: 'Who can enroll in YGI programmes?', a: 'Our multidisciplinary programmes cater to working professionals, directors, school & college students, educators, rural learners, and institutions seeking customized learning frameworks.' },
+  { q: 'What is the institutional governance and legal status of YGI?', a: 'Yogbodhi Global Institute operates as a unified platform supported by Yogbodhi Private Limited (Platform & LMS Operator), Yogbodhi Global Limited (Academic Outreach), and Yogbodhi Foundation Limited (Research & Charitable Initiatives).' },
 ];
 
 const FAQ = () => {

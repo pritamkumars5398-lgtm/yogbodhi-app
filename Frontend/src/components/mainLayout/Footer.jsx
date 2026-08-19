@@ -7,71 +7,72 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: "Classroom Courses", href: "/course" },
-    { name: "Test Series", href: "/test" },
-    { name: "Contact Us", href: "/contact" },
-    { name: "Terms & Conditions", href: "/termsandconditions" },
-    { name: "Privacy Policy", href: "/privacypolicy" }
+    { name: "Learning Systems (CEP, ALS, CLS)", href: "/cep" },
+    { name: "Six Academic Schools", href: "/schools" },
+    { name: "Approved Programmes", href: "/course" },
+    { name: "Research & Publications", href: "/blog" },
+    { name: "Academic Faculty & Mentors", href: "/faculty" },
+    { name: "Institutional Partnerships", href: "/about" },
+    { name: "Governance & Legal Status", href: "/about" },
+    { name: "Contact Us & Enquiry Desk", href: "/contact" }
   ];
 
   const socialLinks = [
     {
       name: "Facebook",
       icon: <FaFacebook size={18} />,
-      href: "https://www.facebook.com/rootsclasses1313/",
+      href: "#",
       color: "hover:bg-blue-600"
     },
     {
       name: "Instagram",
       icon: <FaInstagram size={18} />,
-      href: "https://www.instagram.com/roots_classes?igsh=cndtdml4MW0wNmFz",
+      href: "#",
       color: "hover:bg-pink-600"
     },
     {
       name: "LinkedIn",
       icon: <FaLinkedin size={18} />,
-      href: "https://www.linkedin.com/company/roots-classes/",
+      href: "#",
       color: "hover:bg-blue-700"
     },
     {
       name: "YouTube",
       icon: <FaYoutube size={18} />,
-      href: "https://www.youtube.com/@nikolaphysics",
+      href: "#",
       color: "hover:bg-yellow-600"
     }
   ];
 
   return (
-    <footer className="relative bg-gray-900 text-gray-400 overflow-hidden border-t border-gray-800 mt-auto">
+    <footer className="relative bg-gray-900 text-gray-400 overflow-hidden border-t border-gray-800 mt-auto font-sans">
       {/* Background glowing effects */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -left-24 w-96 h-9 bg-[#ba9d25]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#ba9d25]/5 rounded-full blur-3xl"></div>
+        <div className="absolute -top-24 -left-24 w-96 h-9 bg-orange-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-1 py-12 lg:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
 
           {/* Brand Section */}
           <div className="lg:col-span-1 text-center md:text-left flex flex-col items-center md:items-start">
             <Link to="/" className="inline-block mb-6">
-              <img src="/assets/yogbodhi.png" alt="Yogbodhi Logo" className="h-17 w-full drop-shadow-xl" />
+              <img src="/assets/yogbodhi.png" alt="Yogbodhi Global Institute Logo" className="h-16 w-auto drop-shadow-xl" />
             </Link>
-            <p className="text-gray-300 text-sm font-bold leading-relaxed mb-2 max-w-xs">
-              A Global Platform for Continuing, Alternative and Complementary Learning
+            <p className="text-white text-sm font-bold leading-relaxed mb-2 max-w-xs">
+              Yogbodhi Global Institute
             </p>
             <p className="text-gray-400 text-xs leading-relaxed mb-6 max-w-xs">
-              Connecting professional education, flexible learning, practical skills, traditional wisdom and contemporary knowledge.
+              A Global Platform for Continuing, Alternative and Complementary Learning (CEP, ALS & CLS).
             </p>
             <div className="flex gap-4 justify-center md:justify-start">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   aria-label={`Visit our ${social.name} page`}
-                  className={`w-10 h-10 rounded-full bg-gray-800/80 border border-gray-700/50 flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white ${social.color} hover:border-transparent hover:shadow-[0_0_15px_rgba(186,157,37,0.3)] hover:-translate-y-1`}
+                  className={`w-10 h-10 rounded-full bg-gray-800/80 border border-gray-700/50 flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white ${social.color} hover:border-transparent hover:shadow-md hover:-translate-y-1`}
                 >
                   {social.icon}
                 </a>
@@ -82,17 +83,17 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="text-center md:text-left">
             <h3 className="text-white text-lg font-bold mb-6 tracking-wide">
-              Quick Links
-              <span className="block w-20 h-1 bg-gradient-to-r from-[#ba9d25] to-transparent mt-2 mx-auto md:mx-0 rounded-full"></span>
+              Navigation & Structure
+              <span className="block w-20 h-1 bg-gradient-to-r from-orange-500 to-transparent mt-2 mx-auto md:mx-0 rounded-full"></span>
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className=" text-sm text-gray-400 hover:text-[#ba9d25] transition-all duration-300 flex items-center gap-2 group justify-center md:justify-start w-fit mx-auto md:mx-0"
+                    className="text-xs text-gray-300 hover:text-orange-400 transition-all duration-300 flex items-center gap-2 group justify-center md:justify-start w-fit mx-auto md:mx-0 font-medium"
                   >
-                    <ChevronRight size={14} className="opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-[#ba9d25]" />
+                    <ChevronRight size={14} className="opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-orange-400" />
                     <span>{link.name}</span>
                   </Link>
                 </li>
@@ -103,35 +104,38 @@ const Footer = () => {
           {/* Contact Information */}
           <div className="text-center md:text-left">
             <h3 className="text-white text-lg font-bold mb-6 tracking-wide">
-              Contact Us
-              <span className="block w-20 h-1 bg-gradient-to-r from-[#ba9d25] to-transparent mt-2 mx-auto md:mx-0 rounded-full"></span>
+              Official Contact Desk
+              <span className="block w-20 h-1 bg-gradient-to-r from-orange-500 to-transparent mt-2 mx-auto md:mx-0 rounded-full"></span>
             </h3>
-            <div className="space-y-5">
+            <div className="space-y-4 text-xs text-gray-300">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-3 group">
-                <div className="w-10 h-10 rounded-lg bg-gray-800/80 border border-gray-700/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#ba9d25]/10 group-hover:border-[#ba9d25]/30 transition-all duration-300">
-                  <Phone size={18} className="text-[#ba9d25]" />
+                <div className="w-9 h-9 rounded-lg bg-gray-800/80 border border-gray-700/50 flex items-center justify-center flex-shrink-0 text-orange-400">
+                  <Phone size={16} />
                 </div>
-                <div className="mt-1 md:mt-2">
-                  <p className="text-sm hover:text-white transition-colors cursor-pointer">+91 98775-15330</p>
+                <div className="mt-1">
+                  <p className="font-semibold text-white">YGI Institutional Desk</p>
+                  <p className="text-gray-400">+91 98775-15330</p>
                 </div>
               </div>
 
               <div className="flex flex-col md:flex-row items-center md:items-start gap-3 group">
-                <div className="w-10 h-10 rounded-lg bg-gray-800/80 border border-gray-700/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#ba9d25]/10 group-hover:border-[#ba9d25]/30 transition-all duration-300">
-                  <Mail size={18} className="text-[#ba9d25]" />
+                <div className="w-9 h-9 rounded-lg bg-gray-800/80 border border-gray-700/50 flex items-center justify-center flex-shrink-0 text-orange-400">
+                  <Mail size={16} />
                 </div>
-                <div className="mt-1 md:mt-2 break-all">
-                  <p className="text-sm hover:text-white transition-colors cursor-pointer">yogbodhiglobal1313@gmail.com</p>
+                <div className="mt-1 break-all">
+                  <p className="font-semibold text-white">Official Email</p>
+                  <a href="mailto:info@yogbodhi.in" className="text-orange-400 hover:underline">info@yogbodhi.in</a>
                 </div>
               </div>
 
               <div className="flex flex-col md:flex-row items-center md:items-start gap-3 group">
-                <div className="w-10 h-10 rounded-lg bg-gray-800/80 border border-gray-700/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#ba9d25]/10 group-hover:border-[#ba9d25]/30 transition-all duration-300">
-                  <MapPin size={18} className="text-[#ba9d25]" />
+                <div className="w-9 h-9 rounded-lg bg-gray-800/80 border border-gray-700/50 flex items-center justify-center flex-shrink-0 text-orange-400">
+                  <MapPin size={16} />
                 </div>
-                <div className="mt-1 md:mt-2">
-                  <p className="text-sm leading-relaxed max-w-[200px] mx-auto md:mx-0">
-                    Gill Rd, opp. ITI College, Shilapuri, Ludhiana, Punjab 141003
+                <div className="mt-1">
+                  <p className="font-semibold text-white">Administrative Centre</p>
+                  <p className="text-gray-400 leading-relaxed max-w-[200px] mx-auto md:mx-0">
+                    Yogbodhi Global Institute Administrative Office & Institutional Registry
                   </p>
                 </div>
               </div>

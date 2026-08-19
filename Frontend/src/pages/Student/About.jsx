@@ -149,8 +149,51 @@ const About = () => {
               </div>
               <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
                 <h4 className="font-bold text-gray-900 mb-2">Academic Collaborations</h4>
-                <p className="text-xs text-gray-500 leading-relaxed">Cooperating with statutory professional bodies and autorised institutions to deliver verified certificates and career ready credentials.</p>
+                <p className="text-xs text-gray-500 leading-relaxed">Cooperating with statutory professional bodies and authorised institutions to deliver verified certificates and career-ready credentials.</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Institutional Governance and Legal Status */}
+      <section className="py-20 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-12">
+            <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-orange-50 text-orange-600 border border-orange-200 uppercase tracking-widest">
+              Institutional Transparency
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-4">
+              Institutional Governance & Legal Status
+            </h2>
+            <p className="text-gray-600 text-sm mt-3 leading-relaxed">
+              Yogbodhi Global Institute operates as a unified multidisciplinary ecosystem backed by defined legal operators and governance bodies.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm space-y-3">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">Platform & Technology Operator</span>
+              <h3 className="text-lg font-bold text-gray-900">Yogbodhi Private Limited (YPL)</h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Manages digital platform infrastructure, learning management systems (LMS), technology operations, administrative support, and platform delivery.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm space-y-3">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">International & Academic Entity</span>
+              <h3 className="text-lg font-bold text-gray-900">Yogbodhi Global Limited (YGL)</h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Oversees global academic outreach, institutional partnerships, international continuing education initiatives, and executive learning collaborations.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm space-y-3">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">Charitable & Research Entity</span>
+              <h3 className="text-lg font-bold text-gray-900">Yogbodhi Foundation Limited (YFL)</h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Directs charitable educational projects, alternative community learning circles (ALS), rural literacy drives, policy research, and wellness initiatives.
+              </p>
             </div>
           </div>
         </div>

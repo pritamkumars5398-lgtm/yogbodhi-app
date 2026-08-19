@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, BookOpen, Stethoscope, User, Atom, FlaskConical, Calculator, Dna, ArrowRight, PlayCircle, Star, ShieldCheck } from 'lucide-react';
+import { GraduationCap, BookOpen, User, Atom, ArrowRight, PlayCircle, Star, ShieldCheck, Landmark, Cpu, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroBanner = () => {
@@ -43,7 +43,7 @@ const HeroBanner = () => {
               </h2>
 
               <p className="text-gray-600 text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                Pioneering principal learning systems (CEP, ALS & CLS) across six schools to empower professionals, directors, students, educators, and institutions worldwide.
+                A multidisciplinary global platform for continuing, alternative and complementary learning (CEP, ALS & CLS) across six academic schools.
               </p>
             </div>
 
@@ -84,10 +84,10 @@ const HeroBanner = () => {
 
           </div>
 
-          {/* Right Visual Area - Glassmorphism floating cards */}
+          {/* Right Visual Area - Glassmorphism Floating Domain Cards */}
           <div className="relative h-[500px] w-full hidden lg:flex items-center justify-center lg:mt-4">
             {/* Center Core */}
-            <div className="absolute z-20 w-32 h-35 rounded-full bg-white shadow-2xl flex items-center justify-center border-4 border-orange-50">
+            <div className="absolute z-20 w-32 h-32 rounded-full bg-white shadow-2xl flex items-center justify-center border-4 border-orange-50">
               <img src="/assets/yogbodhi.png" alt="Yogbodhi Logo" className="w-full h-auto object-contain drop-shadow-md" />
             </div>
 
@@ -95,49 +95,52 @@ const HeroBanner = () => {
             <div className="absolute w-[300px] h-[300px] border border-gray-300/40 rounded-full animate-[spin_40s_linear_infinite]"></div>
             <div className="absolute w-[450px] h-[450px] border border-dashed border-gray-300/40 rounded-full animate-[spin_60s_linear_infinite_reverse]"></div>
 
-            {/* Floating Subject Cards */}
-            <div className="absolute top-[10%] left-[10%] bg-white/70 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/40 flex items-center gap-3 animate-[bounce_4s_infinite] hover:scale-105 transition-transform cursor-pointer z-30">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600"><Atom size={24} /></div>
-              <div><p className="font-bold text-gray-800">Physics</p><p className="text-xs text-gray-500">Concepts Clear</p></div>
+            {/* Floating Learning Domain Cards */}
+            {/* 1. Governance */}
+            <div className="absolute top-[8%] left-[5%] bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 animate-[bounce_4s_infinite] hover:scale-105 transition-transform cursor-pointer z-30">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-[#0a1b4d]"><ShieldCheck size={24} /></div>
+              <div><p className="font-bold text-gray-900 text-sm">Governance</p><p className="text-xs text-gray-500 font-medium">Leadership & Ethics</p></div>
             </div>
 
-            <div className="absolute bottom-[15%] left-[5%] bg-white/70 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/40 flex items-center gap-3 animate-[bounce_5s_infinite_0.5s] hover:scale-105 transition-transform cursor-pointer z-30">
-              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center text-green-600"><FlaskConical size={24} /></div>
-              <div><p className="font-bold text-gray-800">Chemistry</p><p className="text-xs text-gray-500">Reactions Mastered</p></div>
+            {/* 2. Business */}
+            <div className="absolute top-[12%] right-[2%] bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 animate-[bounce_5s_infinite_0.5s] hover:scale-105 transition-transform cursor-pointer z-30">
+              <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700"><Landmark size={24} /></div>
+              <div><p className="font-bold text-gray-900 text-sm">Business</p><p className="text-xs text-gray-500 font-medium">Finance & Enterprise</p></div>
             </div>
 
-            <div className="absolute top-[15%] right-[5%] bg-white/70 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/40 flex items-center gap-3 animate-[bounce_6s_infinite_1s] hover:scale-105 transition-transform cursor-pointer z-30">
-              <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600"><Calculator size={24} /></div>
-              <div><p className="font-bold text-gray-800">Maths</p><p className="text-xs text-gray-500">Problem Solving</p></div>
+            {/* 3. Technology */}
+            <div className="absolute bottom-[16%] left-[2%] bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 animate-[bounce_6s_infinite_1s] hover:scale-105 transition-transform cursor-pointer z-30">
+              <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-700"><Cpu size={24} /></div>
+              <div><p className="font-bold text-gray-900 text-sm">Technology</p><p className="text-xs text-gray-500 font-medium">AI & Digital Innovation</p></div>
             </div>
 
-            <div className="absolute bottom-[20%] right-[10%] bg-white/70 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/40 flex items-center gap-3 animate-[bounce_4.5s_infinite_1.5s] hover:scale-105 transition-transform cursor-pointer z-30">
-              <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600"><Dna size={24} /></div>
-              <div><p className="font-bold text-gray-800">Biology</p><p className="text-xs text-gray-500">Life Sciences</p></div>
+            {/* 4. Wellness */}
+            <div className="absolute bottom-[18%] right-[5%] bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-3 animate-[bounce_4.5s_infinite_1.5s] hover:scale-105 transition-transform cursor-pointer z-30">
+              <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600"><GraduationCap size={24} /></div>
+              <div><p className="font-bold text-gray-900 text-sm">Wellness</p><p className="text-xs text-gray-500 font-medium">Yoga & Human Dev.</p></div>
             </div>
 
-            {/* Target Classes Badge */}
+            {/* Top Principal Learning Systems Badge */}
             <div className="absolute -top-4 right-1/2 translate-x-1/2 bg-[#0a1b4d] text-white px-6 py-2 rounded-full shadow-lg border-2 border-white z-30">
-              <span className="font-bold text-sm tracking-wide whitespace-nowrap">Class 9-12 | NEET | JEE</span>
+              <span className="font-bold text-sm tracking-widest uppercase text-orange-400">CEP | ALS | CLS</span>
             </div>
 
           </div>
 
-          {/* Mobile Grid for Subjects (only shows on mobile/tablet) */}
-          <div className="lg:hidden grid grid-cols-2 sm:grid-cols-3 gap-3 w-full px-2 mt-4">
+          {/* Mobile Grid for Learning Domains (only shows on mobile/tablet) */}
+          <div className="lg:hidden grid grid-cols-2 gap-3 w-full px-2 mt-4">
             {[
-              { icon: Atom, text: 'Physics', bg: 'bg-blue-50', textCol: 'text-blue-500' },
-              { icon: FlaskConical, text: 'Chemistry', bg: 'bg-green-50', textCol: 'text-green-500' },
-              { icon: Calculator, text: 'Maths', bg: 'bg-orange-50', textCol: 'text-orange-500' },
-              { icon: Dna, text: 'Biology', bg: 'bg-purple-50', textCol: 'text-purple-500' },
-              { icon: GraduationCap, text: 'Class 9-12', bg: 'bg-indigo-50', textCol: 'text-indigo-500' },
-              { icon: Stethoscope, text: 'NEET/JEE', bg: 'bg-red-50', textCol: 'text-red-500' }
+              { icon: ShieldCheck, title: 'Governance', desc: 'Leadership & Ethics', bg: 'bg-blue-50', textCol: 'text-[#0a1b4d]' },
+              { icon: Landmark, title: 'Business', desc: 'Finance & Enterprise', bg: 'bg-amber-50', textCol: 'text-amber-700' },
+              { icon: Cpu, title: 'Technology', desc: 'AI & Digital Innovation', bg: 'bg-indigo-50', textCol: 'text-indigo-700' },
+              { icon: GraduationCap, title: 'Wellness', desc: 'Yoga & Human Dev.', bg: 'bg-orange-50', textCol: 'text-orange-600' }
             ].map((item, idx) => (
-              <div key={idx} className="bg-white/80 backdrop-blur-sm p-3 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-2 text-center hover:shadow-md transition-shadow">
+              <div key={idx} className="bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center gap-1.5 text-center hover:shadow-md transition-shadow">
                 <div className={`w-10 h-10 rounded-full ${item.bg} ${item.textCol} flex items-center justify-center`}>
                   <item.icon size={20} />
                 </div>
-                <span className="text-sm font-semibold text-gray-800">{item.text}</span>
+                <span className="text-xs font-bold text-gray-900">{item.title}</span>
+                <span className="text-[10px] text-gray-500">{item.desc}</span>
               </div>
             ))}
           </div>

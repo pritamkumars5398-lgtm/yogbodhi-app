@@ -131,13 +131,13 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { icon: '📞', label: 'Call Us', value: '+91 98775-15330', hint: 'Mon–Sat, 9am–6pm', bg: 'hover:border-yellow-200 hover:bg-yellow-50', accent: 'text-[#ba9d25]', href: 'tel:+919877515330' },
-              { icon: '✉️', label: 'Email Us', value: 'yogbodhiofficial@gmail.com', hint: 'We reply within 24h', bg: 'hover:border-blue-200 hover:bg-blue-50', accent: 'text-[#0078FF]', href: 'mailto:yogbodhiofficial@gmail.com?subject=Yogbodhi%20enquiry&body=Hi%2C%20I%20wanted%20to%20enquire%20about...' },
+              { icon: '📞', label: 'Call Us', value: '+91 98775-15330', hint: 'Mon–Sat, 9am–6pm', bg: 'hover:border-orange-200 hover:bg-orange-50', accent: 'text-orange-600', href: 'tel:+919877515330' },
+              { icon: '✉️', label: 'Email Us', value: 'info@yogbodhi.in', hint: 'We reply within 24h', bg: 'hover:border-blue-200 hover:bg-blue-50', accent: 'text-[#0a1b4d]', href: 'mailto:info@yogbodhi.in?subject=YGI%20Institutional%20Enquiry' },
               { icon: '💬', label: 'WhatsApp', value: 'Chat with us', hint: 'Quick responses', bg: 'hover:border-green-200 hover:bg-green-50', accent: 'text-green-600', href: 'https://wa.me/919877515330' },
             ].map(item => (
               <a key={item.label} 
                 href={item.label === 'Email Us' 
-                  ? `https://mail.google.com/mail/?view=cm&fs=1&to=yogbodhiofficial@gmail.com&su=Yogbodhi%20enquiry&body=Hi%2C%20I%20wanted%20to%20enquire%20about...`
+                  ? `mailto:info@yogbodhi.in?subject=YGI%20Institutional%20Enquiry`
                   : item.href
                 }
                 onClick={async (e) => {
@@ -181,22 +181,18 @@ const Contact = () => {
 
               {/* Address card — dark */}
               <div className="bg-white rounded-2xl p-6 relative overflow-hidden border border-gray-100 shadow-sm">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#0078FF]/5 rounded-full blur-2xl pointer-events-none" />
-                <div className="w-10 h-10 bg-yellow-50 rounded-xl flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-[#ba9d25]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl pointer-events-none" />
+                <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-widest mb-1">Our Location</p>
-                <h3 className="font-bold text-gray-900 mb-2">Ludhiana Centre</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  Gill Rd, opp. ITI College,<br />Shilapuri, Ludhiana,<br />Punjab — 141003
+                <p className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-1">Administrative Centre</p>
+                <h3 className="font-bold text-gray-900 mb-2">Institutional Registry</h3>
+                <p className="text-sm text-gray-600 leading-relaxed font-medium">
+                  Yogbodhi Global Institute Administrative Office & Institutional Registry
                 </p>
-                <a href="https://maps.google.com/?q=Yogbodhi+Ludhiana" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-[#0078FF] hover:underline">
-                  Open in Maps →
-                </a>
               </div>
 
               {/* Office Hours */}
@@ -395,16 +391,15 @@ const Contact = () => {
             {/* Visit us card */}
             <div className="lg:col-span-4 flex flex-col gap-4">
               <div className="bg-gray-50 rounded-2xl p-7 flex-1 relative overflow-hidden border border-gray-100">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#0078FF]/5 rounded-full blur-2xl pointer-events-none" />
-                <p className="text-xs font-bold text-[#0078FF] uppercase tracking-widest mb-3 relative">Visit Us</p>
-                <h3 className="text-lg font-bold text-gray-900 mb-3 relative">Come see us<br />in person</h3>
-                <p className="text-sm text-gray-500 leading-relaxed relative">
-                  Gill Rd, opp. ITI College,<br />Shilapuri, Ludhiana,<br />Punjab — 141003
+                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl pointer-events-none" />
+                <p className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-3 relative">Visit Us</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-3 relative">Administrative Office &<br />Institutional Registry</h3>
+                <p className="text-sm text-gray-600 leading-relaxed relative font-medium">
+                  Yogbodhi Global Institute Administrative Centre
                 </p>
-                <a href="https://maps.google.com/?q=Gill+Road+ITI+College+Shilapuri+Ludhiana" target="_blank" rel="noopener noreferrer"
-                  className="relative inline-flex items-center gap-2 mt-5 px-4 py-2 bg-[#ba9d25] text-white text-xs font-bold rounded-xl hover:opacity-90 transition shadow-lg shadow-yellow-100">
-                  Get Directions →
-                </a>
+                <Link to="/enquiry" className="relative inline-flex items-center gap-2 mt-5 px-4 py-2 bg-[#0a1b4d] text-white text-xs font-bold rounded-xl hover:bg-blue-900 transition shadow-sm">
+                  Institutional Enquiry Desk →
+                </Link>
               </div>
             </div>
 

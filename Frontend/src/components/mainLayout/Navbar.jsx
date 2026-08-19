@@ -1,356 +1,205 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Menu, X, User, LogOut, ChevronDown, LayoutDashboard, UserCircle } from 'lucide-react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import useStudentStore from '../../Store/studentstore';
-import { SiCoursera } from 'react-icons/si';
-import NotificationDropdown from '../Notification/NotificationDropdown';
-
-const navItems = [
-  { name: 'Home', path: '/' },
-  { name: 'About YGI', path: '/about' },
-  {
-    name: 'Learning Systems',
-    dropdown: [
-      { name: 'Continuing Education Programme', path: '/cep' },
-      { name: 'Alternative Learning System', path: '/als' },
-      { name: 'Complementary Learning System', path: '/cls' }
-    ]
-  },
-  { name: 'Schools & Institutes', path: '/schools' },
-  { name: 'Programmes', path: '/course' },
-  { name: 'Admissions', path: '/enquiry?subject=admission' },
-  {
-    name: 'More',
-    dropdown: [
-      { name: 'Faculty & Mentors', path: '/faculty' },
-      { name: 'Research & Publications', path: '/blog' },
-      { name: 'Partnerships', path: '/partnerships' },
-      { name: 'Student Support', path: '/dashboard' },
-      { name: 'Contact', path: '/contact' }
-    ]
-  }
-];
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { 
+  ChevronDown, BookOpen, GraduationCap, Compass, ShieldCheck, 
+  Menu, X, Landmark, User, Sparkles 
+} from 'lucide-react';
 
 const Navbar = () => {
-  const { student, logout, setStudent } = useStudentStore();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [learningDropdownOpen, setLearningDropdownOpen] = useState(false);
   const location = useLocation();
-  const dropdownRef = useRef(null);
-  const navContainerRef = useRef(null);
 
-  /* scroll shadow */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  /* auth check */
   useEffect(() => {
-    const check = () => {
-      if (student && (student._id || student.id)) { setIsLoggedIn(true); return; }
-      try {
-        const s = localStorage.getItem('student');
-        if (s) { const p = JSON.parse(s); if (p?._id || p?.id) { setIsLoggedIn(true); if (!student && setStudent) setStudent(p); return; } }
-        const u = localStorage.getItem('user');
-        if (u) { const p = JSON.parse(u); if (p?._id || p?.id) { setIsLoggedIn(true); return; } }
-      } catch { }
-      setIsLoggedIn(false);
-    };
-    check();
-  }, [student, setStudent]);
-
-  /* click outside */
-  useEffect(() => {
-    const h = (e) => { 
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsDropdownOpen(false); 
-      if (navContainerRef.current && !navContainerRef.current.contains(e.target)) setOpenDropdown(null); 
-    };
-    document.addEventListener('mousedown', h);
-    return () => document.removeEventListener('mousedown', h);
-  }, []);
-
-  const getName = () => {
-    if (student?.fullName) return student.fullName;
-    if (student?.name) return student.name;
-    try {
-      const s = JSON.parse(localStorage.getItem('student') || '{}');
-      return s.fullName || s.name || s.username || s.email?.split('@')[0] || 'Student';
-    } catch { return 'Student'; }
-  };
-
-  const getEmail = () => {
-    if (student?.email) return student.email;
-    try { return JSON.parse(localStorage.getItem('student') || '{}').email || ''; } catch { return ''; }
-  };
-
-  const isAdminOrInstructor = () => ['admin', 'instructor'].includes(student?.role);
-  const isStudent = () => student?.role === 'student' || (!student?.role && isLoggedIn);
-
-  const handleLogout = () => {
-    ['user', 'student', 'token', 'authToken', 'studentToken'].forEach(k => localStorage.removeItem(k));
-    sessionStorage.clear();
-    logout?.();
-    setIsLoggedIn(false);
-    setIsDropdownOpen(false);
-    setIsMenuOpen(false);
-    navigate('/stdlogin');
-  };
-
-  const isActive = (path) => location.pathname === path;
+    setMobileMenuOpen(false);
+    setLearningDropdownOpen(false);
+  }, [location]);
 
   return (
-    <header className="sticky top-0 z-[60] w-full">
-      {/* Announcement bar (Glassmorphism Light) */}
-      <div className="relative overflow-hidden bg-[#fdfdfd]/80 backdrop-blur-md border-b border-gray-200/50 py-1 px-4 text-center">
-        {/* Subtle decorative color accents */}
-        <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#ba9d25]/5 to-[#ba9d25]/1 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#ba9d25]/5 to-[#ba9d25]/1 pointer-events-none" />
-
-        <div className="relative z-10 overflow-hidden w-full">
-          <div className="animate-marquee flex items-center gap-4 text-[10px] sm:text-xs tracking-wide">
-            <span className="flex items-center gap-1.5 font-bold text-gray-700 bg-orange-50 px-3 py-0.5 rounded-full border border-orange-200/60">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
-              Yogbodhi Global Institute — Under Development
+    <header className="sticky top-0 z-[60] w-full font-sans">
+      {/* 1. Announcement bar */}
+      <div className="relative overflow-hidden bg-[#0a1b4d] text-white py-1.5 px-4 text-center border-b border-blue-900/40">
+        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs font-semibold">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
+            <span className="tracking-wide uppercase text-[11px] font-bold text-orange-300">
+              Yogbodhi Global Institute
             </span>
-            <span className="text-gray-300 hidden sm:inline">|</span>
-            <Link to="/scholarship" className="group flex items-center gap-1 font-black">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ba9d25] to-[#a88c21] group-hover:from-[#a88c21] group-hover:to-[#ba9d25] transition-all">
-                Apply for 100% Scholarship
-              </span>
-              <span className="text-[#ba9d25] group-hover:translate-x-0.5 transition-transform">→</span>
-            </Link>
+          </div>
+
+          <div className="flex items-center gap-3 text-[11px] text-gray-300">
+            <span className="hidden sm:inline-block font-medium">Learning for Life. Leadership for the Future.</span>
+            <span className="hidden sm:inline text-gray-500">|</span>
+            <span className="px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-400/30 text-[10px] font-bold tracking-wider uppercase">
+              Website under development
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Main Navbar */}
-      <nav className={`bg-white/70 backdrop-blur-md transition-shadow duration-200 ${scrolled ? 'shadow-[10_1px_240px_rgba(0,0,0,0.08)]' : 'border-b border-gray-100'}`}>
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-2">
+      {/* 2. Main Navbar */}
+      <nav className={`bg-white/95 backdrop-blur-md border-b transition-all duration-300 ${scrolled ? 'shadow-md border-gray-200' : 'border-gray-100'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
 
-            {/* Logo */}
-            <Link to="/" className="flex items-center flex-shrink-0">
-              <img src="/assets/yogbodhi.png" alt="Yogbodhi" className="h-16 w-auto ml-2" />
+            {/* Brand Logo */}
+            <Link to="/" className="flex items-center gap-3 group">
+              <img src="/assets/yogbodhi.png" alt="Yogbodhi Global Institute" className="h-14 w-auto object-contain group-hover:scale-105 transition-transform" />
+              <div className="hidden sm:flex flex-col">
+                <span className="text-lg font-black text-[#0a1b4d] tracking-tight leading-none" style={{ fontFamily: 'Times New Roman, serif' }}>
+                  YOGBODHI
+                </span>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-orange-600 uppercase">
+                  Global Institute
+                </span>
+              </div>
             </Link>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-1 xl:gap-1.5" ref={navContainerRef}>
-              {navItems.map((item) => {
-                if (item.dropdown) {
-                  const isOpen = openDropdown === item.name;
-                  return (
-                    <div key={item.name} className="relative">
-                      <button
-                        onClick={() => setOpenDropdown(isOpen ? null : item.name)}
-                        className="px-2.5 py-2.5 rounded-lg text-[11px] xl:text-xs font-semibold transition-all duration-300 flex items-center gap-0.5 text-gray-600 hover:text-[#ba9d25] hover:bg-yellow-50/50 hover:shadow-lg"
-                      >
-                        {item.name}
-                        <ChevronDown size={12} className={`transition-transform ${isOpen ? 'rotate-180 text-[#ba9d25]' : ''}`} />
-                      </button>
-                      {isOpen && (
-                        <div className="absolute left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
-                          {item.dropdown.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              to={subItem.path}
-                              onClick={() => setOpenDropdown(null)}
-                              className={`block px-4 py-2.5 text-xs transition-colors text-gray-700 hover:bg-yellow-50 hover:text-[#ba9d25] ${isActive(subItem.path) ? 'text-[#ba9d25] font-semibold bg-yellow-50/60' : ''}`}
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className={`px-2.5 py-2.5 rounded-lg text-[11px] xl:text-xs font-semibold transition-all duration-300 ${isActive(item.path)
-                      ? 'text-[#ba9d25] bg-yellow-50 shadow-md font-bold'
-                      : 'text-gray-600 hover:text-[#ba9d25] hover:bg-yellow-50/50 hover:shadow-lg'
-                      }`}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
-            </div>
+            {/* Desktop Navigation Links */}
+            <div className="hidden lg:flex items-center gap-7">
+              <Link to="/" className={`text-xs font-bold uppercase tracking-wider transition-colors ${location.pathname === '/' ? 'text-orange-600' : 'text-gray-700 hover:text-[#0a1b4d]'}`}>
+                Home
+              </Link>
 
-            {/* Desktop actions */}
-            <div className="hidden md:flex items-center gap-3">
-              {isLoggedIn ? (
-                <div className="flex items-center gap-3">
-                  <NotificationDropdown />
-                  <div className="relative" ref={dropdownRef}>
-                    <button
-                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200 hover:border-gray-300 bg-white transition-colors text-sm cursor-pointer"
-                    >
-                      <div className="w-6 h-6 rounded-full bg-[#ba9d25] flex items-center justify-center flex-shrink-0 shadow-md shadow-yellow-200">
-                        <User size={13} className="text-white" />
-                      </div>
-                      <span className="text-gray-700 font-medium max-w-[120px] truncate group-hover:text-[#ba9d25] transition-colors">{getName()}</span>
-                      <ChevronDown size={14} className={`text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180 text-[#ba9d25]' : 'group-hover:text-[#ba9d25]'}`} />
-                    </button>
+              <Link to="/about" className={`text-xs font-bold uppercase tracking-wider transition-colors ${location.pathname === '/about' ? 'text-orange-600' : 'text-gray-700 hover:text-[#0a1b4d]'}`}>
+                About YGI
+              </Link>
 
-                    {isDropdownOpen && (
-                      <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
-                        <div className="px-4 py-3 border-b border-gray-100">
-                          <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 bg-[#ba9d25] rounded-full flex items-center justify-center">
-                              <User size={16} className="text-white" />
-                            </div>
-                            <div className="min-w-0">
-                              <p className="text-sm font-semibold text-gray-900 truncate">{getName()}</p>
-                              {getEmail() && <p className="text-xs text-gray-400 truncate">{getEmail()}</p>}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="py-1">
-                          {isAdminOrInstructor() && (
-                            <button onClick={() => { navigate('/admin/'); setIsDropdownOpen(false); }}
-                              className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
-                              <LayoutDashboard size={16} className="text-gray-400" />Dashboard
-                            </button>
-                          )}
-                          {isStudent() && (
-                            <>
-                              <button onClick={() => { navigate('/stdprofile'); setIsDropdownOpen(false); }}
-                                className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
-                                <UserCircle size={16} className="text-gray-400" />My Profile
-                              </button>
-                              <button onClick={() => { navigate('/purchescourse'); setIsDropdownOpen(false); }}
-                                className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
-                                <SiCoursera size={16} className="text-gray-400" />My Courses
-                              </button>
-                            </>
-                          )}
-                        </div>
-                        <div className="border-t border-gray-100 pt-1">
-                          <button onClick={handleLogout}
-                            className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-yellow-600 hover:bg-yellow-50 transition-colors cursor-pointer">
-                            <LogOut size={16} />Logout
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <div className="flex items-center gap-3">
-                  <Link to="/stdlogin">
-                    <button className="px-5 py-2.5 text-sm font-semibold text-gray-700 border border-gray-200 rounded-xl hover:border-[#ba9d25] hover:bg-[#ba9d25] transition-all duration-300 cursor-pointer bg-green-500 text-white">
-                      Login
-                    </button>
-                  </Link>
-                  <Link to="/register">
-                    <button className="px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#ba9d28] to-[#a88c21] hover:from-[#a88c21] hover:to-[#947b1c] rounded-xl transition-all duration-300 shadow-md shadow-yellow-200 hover:shadow-lg hover:shadow-yellow-300 hover:-translate-y-0.5 cursor-pointer">
-                      Sign Up Free
-                    </button>
-                  </Link>
-                </div>
-              )}
-            </div>
+              {/* Learning Systems Dropdown */}
+              <div className="relative" onMouseEnter={() => setLearningDropdownOpen(true)} onMouseLeave={() => setLearningDropdownOpen(false)}>
+                <button className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gray-700 hover:text-[#0a1b4d] py-2">
+                  Learning Systems <ChevronDown size={14} className={`transition-transform duration-200 ${learningDropdownOpen ? 'rotate-180 text-orange-600' : ''}`} />
+                </button>
 
-            {/* Mobile toggle */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
-            >
-              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full right-0 w-[100%] border-t border-gray-100 bg-white shadow-2xl">
-            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
-              {navItems.map((item) => {
-                if (item.dropdown) {
-                  return (
-                    <div key={item.name} className="flex flex-col gap-1 pl-4 border-l-2 border-yellow-200 my-1">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 py-1">{item.name}</span>
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          to={subItem.path}
-                          onClick={() => setIsMenuOpen(false)}
-                          className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${isActive(subItem.path) ? 'text-[#ba9d25] bg-yellow-50 font-semibold' : 'text-gray-600 hover:bg-gray-50'}`}
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  );
-                }
-                return (
-                  <Link key={item.name} to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive(item.path) ? 'text-[#ba9d25] bg-yellow-50' : 'text-gray-600 hover:bg-gray-50'
-                      }`}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
-
-              <div className="mt-2 pt-3 border-t border-gray-100">
-                {isLoggedIn ? (
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-3 px-4 py-2">
-                      <div className="w-8 h-8 bg-[#ba9d25] rounded-full flex items-center justify-center">
-                        <User size={14} className="text-white" />
+                {learningDropdownOpen && (
+                  <div className="absolute top-full left-0 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 space-y-1 animate-fade-in z-50">
+                    <Link to="/cep" className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/60 transition-colors group">
+                      <div className="w-8 h-8 rounded-lg bg-blue-100 text-[#0a1b4d] flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#0a1b4d] group-hover:text-white transition-colors">
+                        <GraduationCap size={18} />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">{getName()}</p>
-                        {getEmail() && <p className="text-xs text-gray-400">{getEmail()}</p>}
+                        <div className="text-xs font-bold text-gray-900 group-hover:text-[#0a1b4d]">CEP</div>
+                        <div className="text-[11px] text-gray-500 font-medium leading-tight">Continuing Education Programme</div>
                       </div>
-                    </div>
-                    {isAdminOrInstructor() && (
-                      <Link to="/admin/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-gray-50">
-                        <LayoutDashboard size={16} className="text-gray-400" />Dashboard
-                      </Link>
-                    )}
-                    {isStudent() && (
-                      <>
-                        <Link to="/stdprofile" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-gray-50">
-                          <UserCircle size={16} className="text-gray-400" />My Profile
-                        </Link>
-                        <Link to="/purchescourse" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-gray-50">
-                          <SiCoursera size={16} className="text-gray-400" />My Courses
-                        </Link>
-                      </>
-                    )}
-                    <button onClick={handleLogout} className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-sm text-yellow-600 hover:bg-yellow-50 cursor-pointer">
-                      <LogOut size={16} />Logout
-                    </button>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 gap-3 px-1">
-                    <Link to="/stdlogin" onClick={() => setIsMenuOpen(false)}>
-                      <button className="w-full py-2.5 text-sm font-semibold text-gray-700 border border-gray-200 hover:border-[#ba9d25] hover:text-[#ba9d25] hover:bg-yellow-50 rounded-xl cursor-pointer transition-all">Login</button>
                     </Link>
-                    <Link to="/register" onClick={() => setIsMenuOpen(false)}>
-                      <button className="w-full py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#ba9d25] to-[#a88c21] hover:from-[#a88c21] hover:to-[#947b1c] shadow-md shadow-yellow-200 rounded-xl cursor-pointer transition-all">Sign Up Free</button>
+
+                    <Link to="/als" className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-orange-50/60 transition-colors group">
+                      <div className="w-8 h-8 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                        <Compass size={18} />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-gray-900 group-hover:text-orange-600">ALS</div>
+                        <div className="text-[11px] text-gray-500 font-medium leading-tight">Alternative Learning System</div>
+                      </div>
+                    </Link>
+
+                    <Link to="/cls" className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-emerald-50/60 transition-colors group">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        <BookOpen size={18} />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-gray-900 group-hover:text-emerald-600">CLS</div>
+                        <div className="text-[11px] text-gray-500 font-medium leading-tight">Complementary Learning System</div>
+                      </div>
                     </Link>
                   </div>
                 )}
               </div>
+
+              {/* Schools & Institutes */}
+              <Link to="/schools" className={`text-xs font-bold uppercase tracking-wider transition-colors ${location.pathname === '/schools' ? 'text-orange-600' : 'text-gray-700 hover:text-[#0a1b4d]'}`}>
+                Six Schools
+              </Link>
+
+              {/* Programmes */}
+              <Link to="/course" className={`text-xs font-bold uppercase tracking-wider transition-colors ${location.pathname === '/course' ? 'text-orange-600' : 'text-gray-700 hover:text-[#0a1b4d]'}`}>
+                Programmes
+              </Link>
+
+              {/* Research */}
+              <Link to="/blog" className={`text-xs font-bold uppercase tracking-wider transition-colors ${location.pathname === '/blog' ? 'text-orange-600' : 'text-gray-700 hover:text-[#0a1b4d]'}`}>
+                Research Hub
+              </Link>
+
+              {/* Contact */}
+              <Link to="/contact" className={`text-xs font-bold uppercase tracking-wider transition-colors ${location.pathname === '/contact' ? 'text-orange-600' : 'text-gray-700 hover:text-[#0a1b4d]'}`}>
+                Contact Us
+              </Link>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="hidden lg:flex items-center gap-3">
+              <Link to="/stdlogin" className="px-4 py-2 rounded-xl text-xs font-bold text-[#0a1b4d] border border-gray-200 hover:border-[#0a1b4d] hover:bg-gray-50 transition-all flex items-center gap-1.5">
+                <User size={14} />
+                Student Portal
+              </Link>
+              <Link to="/enquiry" className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0a1b4d] hover:bg-blue-900 shadow-sm transition-all flex items-center gap-1.5">
+                Enquiry Desk
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="flex lg:hidden items-center gap-2">
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-gray-700 rounded-xl hover:bg-gray-100 transition-colors">
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-100 px-4 pt-3 pb-6 space-y-3">
+            <Link to="/" className="block py-2 text-xs font-bold uppercase tracking-wider text-gray-800 border-b border-gray-50">
+              Home
+            </Link>
+            <Link to="/about" className="block py-2 text-xs font-bold uppercase tracking-wider text-gray-800 border-b border-gray-50">
+              About YGI
+            </Link>
+            <div className="py-2 space-y-2 border-b border-gray-50">
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">Learning Systems</span>
+              <Link to="/cep" className="block text-xs font-bold text-blue-900 pl-2">CEP (Continuing Education)</Link>
+              <Link to="/als" className="block text-xs font-bold text-orange-600 pl-2">ALS (Alternative Learning)</Link>
+              <Link to="/cls" className="block text-xs font-bold text-emerald-600 pl-2">CLS (Complementary Learning)</Link>
+            </div>
+            <Link to="/schools" className="block py-2 text-xs font-bold uppercase tracking-wider text-gray-800 border-b border-gray-50">
+              Six Schools & Institutes
+            </Link>
+            <Link to="/course" className="block py-2 text-xs font-bold uppercase tracking-wider text-gray-800 border-b border-gray-50">
+              Programmes
+            </Link>
+            <Link to="/blog" className="block py-2 text-xs font-bold uppercase tracking-wider text-gray-800 border-b border-gray-50">
+              Research & Publications
+            </Link>
+            <Link to="/contact" className="block py-2 text-xs font-bold uppercase tracking-wider text-gray-800 border-b border-gray-50">
+              Contact Us
+            </Link>
+            <div className="pt-2 flex flex-col gap-2">
+              <Link to="/stdlogin" className="w-full py-2.5 rounded-xl text-xs font-bold text-center text-[#0a1b4d] border border-gray-200">
+                Student Portal Sign In
+              </Link>
+              <Link to="/enquiry" className="w-full py-2.5 rounded-xl text-xs font-bold text-center text-white bg-[#0a1b4d]">
+                Institutional Enquiry Desk
+              </Link>
             </div>
           </div>
         )}
       </nav>
-    </header >
+    </header>
   );
 };
 

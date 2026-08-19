@@ -649,7 +649,7 @@ const ManageSlider = () => {
                     value={formData.title}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="e.g. JEE Preparation"
+                    placeholder="e.g. Continuing Education Programme"
                     required
                   />
                 </div>
@@ -661,7 +661,7 @@ const ManageSlider = () => {
                     value={formData.subtitle}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="e.g. Best coaching for JEE"
+                    placeholder="e.g. Executive & Professional Certifications"
                     required
                   />
                 </div>

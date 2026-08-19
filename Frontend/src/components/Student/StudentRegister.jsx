@@ -97,8 +97,8 @@ const StudentRegistration = () => {
                   <div className="space-y-1">
                     <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-4">Current Class</label>
                     <select name="currentClass" required value={formData.currentClass} onChange={handleChange} className="w-full bg-gray-50 border border-gray-100 rounded-full py-3.5 px-6 focus:ring-2 focus:ring-[#0078FF]/20 focus:border-[#0078FF] text-sm outline-none appearance-none">
-                      <option value="">Select Class</option>
-                      {['8th', '9th', '10th', '11th', '12th', 'Dropper'].map(c => <option key={c} value={c}>{c} Class</option>)}
+                      <option value="">Select Category</option>
+                      {['Professional', 'Executive', 'Student', 'Educator', 'Rural Learner'].map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                   </div>
                 </div>
@@ -110,15 +110,15 @@ const StudentRegistration = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-4">Phone</label>
-                      <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className="w-full bg-gray-50 border border-gray-100 rounded-full py-3.5 px-6 focus:ring-2 focus:ring-[#0078FF]/20 focus:border-[#0078FF] text-sm outline-none" placeholder="10-digit mobile" />
+                      <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className="w-full bg-gray-50 border border-gray-100 rounded-full py-3.5 px-6 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 text-sm outline-none" placeholder="10-digit mobile" />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-4">Course</label>
-                      <select name="interestedCourse" required value={formData.interestedCourse} onChange={handleChange} className="w-full bg-gray-50 border border-gray-100 rounded-full py-3.5 px-6 focus:ring-2 focus:ring-[#0078FF]/20 focus:border-[#0078FF] text-sm outline-none appearance-none">
-                        <option value="">Select Course</option>
-                        <option value="foundation">Foundation</option>
-                        <option value="medical">NEET</option>
-                        <option value="engineering">IIT-JEE</option>
+                      <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-4">Learning System</label>
+                      <select name="interestedCourse" required value={formData.interestedCourse} onChange={handleChange} className="w-full bg-gray-50 border border-gray-100 rounded-full py-3.5 px-6 focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 text-sm outline-none appearance-none">
+                        <option value="">Select System</option>
+                        <option value="CEP">CEP (Continuing Education)</option>
+                        <option value="ALS">ALS (Alternative Learning)</option>
+                        <option value="CLS">CLS (Complementary Learning)</option>
                       </select>
                     </div>
                   </div>
