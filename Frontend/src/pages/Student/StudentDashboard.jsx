@@ -1,43 +1,74 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { LayoutDashboard, Award, BookOpen, Clock, Activity, CheckCircle, ArrowRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Award, BookOpen, Clock, Activity, CheckCircle, ArrowRight, User, LogOut } from 'lucide-react';
+import useStudentStore from '../../Store/studentstore';
+import SEOHead from '../../components/Common/SEOHead';
 
 const StudentDashboard = () => {
-  const stats = [
-    { label: "Enrolled Courses", val: "2", icon: <BookOpen className="text-[#ba9d25]" /> },
-    { label: "Completed Topics", val: "8", icon: <CheckCircle className="text-green-500" /> },
-    { label: "Learning Hours", val: "14 hrs", icon: <Clock className="text-blue-500" /> },
-    { label: "Earned Certificates", val: "1", icon: <Award className="text-purple-500" /> }
-  ];
+  const navigate = useNavigate();
+  const { student, isAuthenticated, logout } = useStudentStore();
 
-  const ongoingCourses = [
-    {
-      title: "Advanced Corporate Governance & Board Effectiveness",
-      segment: "CEP",
-      progress: 65,
-      nextChapter: "Module 3: Board Diversity & Stakeholder ESG"
-    },
-    {
-      title: "Digital Literacy & Smart Communication Circle",
-      segment: "ALS",
-      progress: 20,
-      nextChapter: "Module 1: Collaborative Digital Workspaces"
+  useEffect(() => {
+    // Auth Check: Redirect to login if user is not authenticated
+    const token = localStorage.getItem('token') || localStorage.getItem('studentToken');
+    if (!isAuthenticated && !token && !student?._id) {
+      navigate('/stdlogin?redirect=/dashboard', { replace: true });
     }
+  }, [isAuthenticated, student, navigate]);
+
+  // If user is not logged in, show authentication redirect screen
+  const token = typeof window !== 'undefined' ? (localStorage.getItem('token') || localStorage.getItem('studentToken')) : null;
+  if (!isAuthenticated && !token && !student?._id) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <SEOHead title="Student Portal Access" description="Authentication required to access Yogbodhi Global Institute Student Learning Portal." />
+        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl max-w-md w-full text-center space-y-4">
+          <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mx-auto">
+            <User size={28} />
+          </div>
+          <h2 className="text-2xl font-black text-gray-900">Authentication Required</h2>
+          <p className="text-sm text-gray-600">Please sign in to access your registered learning tracks, certificates, and dashboard.</p>
+          <div className="pt-2 flex flex-col gap-3">
+            <Link to="/stdlogin?redirect=/dashboard" className="w-full py-3 bg-[#0a1b4d] text-white font-bold rounded-xl text-sm hover:bg-blue-900 transition">
+              Sign In to Student Portal
+            </Link>
+            <Link to="/" className="w-full py-3 bg-gray-100 text-gray-700 font-bold rounded-xl text-sm hover:bg-gray-200 transition">
+              Return to Homepage
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const enrolledCount = student?.enrolledCourses?.length || 0;
+
+  const stats = [
+    { label: "Enrolled Programmes", val: `${enrolledCount}`, icon: <BookOpen className="text-[#0a1b4d]" /> },
+    { label: "Completed Topics", val: "0", icon: <CheckCircle className="text-green-600" /> },
+    { label: "Learning Hours", val: "0 hrs", icon: <Clock className="text-blue-600" /> },
+    { label: "Earned Certificates", val: "0", icon: <Award className="text-purple-600" /> }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
+      <SEOHead title="Student Learning Dashboard" description="Track your Yogbodhi Global Institute enrolled programmes, learning progression, and verified credentials." />
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
           <div>
-            <h1 className="text-2xl md:text-3xl font-black text-gray-900">Student Learning Portal</h1>
-            <p className="text-gray-400 text-sm mt-1">Welcome back. Track your learning segments, credits, and certifications.</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#0a1b4d] text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Verified Student Profile</span>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-black text-gray-900">
+              Welcome, {student?.name || student?.fullName || 'Learner'}
+            </h1>
+            <p className="text-gray-500 text-sm mt-1">Yogbodhi Global Institute — Learning Systems Portal</p>
           </div>
-          <div className="flex gap-3">
-            <Link to="/course" className="px-5 py-2.5 bg-gradient-to-r from-[#ba9d25] to-[#a88c21] hover:from-[#a88c21] hover:to-[#947b1c] text-white font-bold rounded-xl text-xs shadow-md transition-all">
-              Explore More Courses
+          <div className="flex flex-wrap gap-3">
+            <Link to="/course" className="px-5 py-2.5 bg-[#0a1b4d] hover:bg-blue-900 text-white font-bold rounded-xl text-xs shadow-md transition-all">
+              Explore Programmes
             </Link>
             <Link to="/verify-certificate" className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl text-xs transition-all border border-gray-200">
               Verify Credentials
@@ -63,71 +94,39 @@ const StudentDashboard = () => {
         {/* Main Dashboard Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* Ongoing Courses */}
+          {/* Registered Programmes */}
           <div className="lg:col-span-2 space-y-6">
             <h2 className="text-xl font-bold text-gray-900">My Registered Programmes</h2>
             
-            <div className="space-y-4">
-              {ongoingCourses.map((c, i) => (
-                <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
-                  <div className="flex justify-between items-start gap-4">
-                    <div>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-gray-900 text-[#ba9d25]">
-                        {c.segment} Programme
-                      </span>
-                      <h3 className="font-bold text-gray-900 text-base mt-2">{c.title}</h3>
-                    </div>
-                    <span className="text-sm font-black text-gray-900">{c.progress}%</span>
-                  </div>
-
-                  {/* Progress Bar */}
-                  <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                    <div className="bg-[#ba9d25] h-full transition-all duration-500" style={{ width: `${c.progress}%` }}></div>
-                  </div>
-
-                  <div className="flex justify-between items-center pt-2 text-xs text-gray-400 font-medium">
-                    <span>Next: {c.nextChapter}</span>
-                    <button className="text-[#ba9d25] font-bold hover:underline flex items-center gap-1">
-                      Resume <ArrowRight size={12} />
-                    </button>
-                  </div>
-                </div>
-              ))}
+            <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm text-center space-y-4">
+              <div className="w-16 h-16 bg-blue-50 text-[#0a1b4d] rounded-2xl flex items-center justify-center mx-auto">
+                <BookOpen size={32} />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900">No Active Enrolments Found</h3>
+              <p className="text-sm text-gray-500 max-w-md mx-auto">
+                You are currently not enrolled in any CEP, ALS, or CLS learning programs. Explore our multidisciplinary schools to get started.
+              </p>
+              <Link to="/course" className="inline-block px-6 py-3 bg-[#0a1b4d] text-white font-bold rounded-xl text-sm hover:bg-blue-900 transition shadow-md">
+                Browse Learning Systems & Courses
+              </Link>
             </div>
           </div>
 
-          {/* Certificate & Credits Summary */}
+          {/* Certificate & Credentials Summary */}
           <div className="space-y-6">
-            <h2 className="text-xl font-bold text-gray-900">Certificates Earned</h2>
+            <h2 className="text-xl font-bold text-gray-900">Issued Certificates</h2>
             
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-[#ba9d25] flex-shrink-0">
-                  <Award size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900 text-sm">Professional Development Credential</h4>
-                  <p className="text-xs text-gray-400 mt-0.5">ID: YGI-CEP-2025-091</p>
-                </div>
+            <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm space-y-6 text-center">
+              <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 mx-auto">
+                <Award size={28} />
+              </div>
+              <div>
+                <h4 className="font-bold text-gray-900 text-sm">No Issued Certificates</h4>
+                <p className="text-xs text-gray-500 mt-1">Complete your registered CEP, ALS, or CLS modules to earn verifiable institutional credentials.</p>
               </div>
               
-              <div className="bg-gray-50 rounded-xl p-4 text-xs space-y-2.5 text-gray-600">
-                <div className="flex justify-between">
-                  <span>Programme:</span>
-                  <span className="font-bold text-gray-900">Advanced Corporate Governance</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Category:</span>
-                  <span className="font-bold text-gray-900">CEP</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Verified status:</span>
-                  <span className="text-green-600 font-bold">Verified</span>
-                </div>
-              </div>
-
-              <Link to="/verify-certificate?id=YGI-CEP-2025-091" className="block text-center w-full py-3 rounded-xl border border-[#ba9d25] text-[#ba9d25] hover:bg-yellow-50/50 font-bold transition-all text-xs">
-                View Certificate Verification Details
+              <Link to="/verify-certificate" className="block text-center w-full py-3 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 font-bold transition-all text-xs">
+                Go to Certificate Verification Portal
               </Link>
             </div>
           </div>

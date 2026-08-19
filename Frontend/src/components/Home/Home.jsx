@@ -7,6 +7,7 @@ import Experts from './Experts';
 import StatsBar from './StatsBar';
 import WhyChooseUs from './WhyChooseUs';
 import FAQ from './FAQ';
+import SEOHead from '../Common/SEOHead';
 import axios from 'axios';
 import api from '../../services/endpoints';
 import fallbackImage from '../../assets/fallback.jpg';
@@ -67,6 +68,10 @@ const SliderPage = () => {
 
   return (
     <>
+      <SEOHead 
+        title="Homepage"
+        description="Yogbodhi Global Institute - Learning for Life. Leadership for the Future. Featuring CEP, ALS, and CLS principal learning systems and six multidisciplinary schools."
+      />
       {/* Hero Banner Section */}
       <HeroBanner />
 

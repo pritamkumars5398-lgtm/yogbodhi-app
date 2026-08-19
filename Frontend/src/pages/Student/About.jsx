@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Target, Compass, Award, Shield, Users, BookOpen, GraduationCap, ChevronRight } from 'lucide-react';
+import SEOHead from '../../components/Common/SEOHead';
 
 const About = () => {
   const pillars = [
@@ -26,6 +27,10 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
+      <SEOHead 
+        title="About Yogbodhi Global Institute" 
+        description="Learn about Yogbodhi Global Institute's institutional status, identity, philosophy, and three principal learning systems (CEP, ALS, CLS)." 
+      />
       {/* Hero Banner */}
       <section className="relative py-24 bg-cover bg-center overflow-hidden text-white" style={{ backgroundImage: "linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.7) 100%), url('/assets/schools_hero.jpg')" }}>
         <div className="absolute top-0 right-0 w-1/3 h-full bg-[#ba9d25]/10 rounded-l-full blur-3xl pointer-events-none" />

@@ -4,6 +4,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import axios from 'axios';
 import api from '../../services/endpoints';
 import useStudentStore from '../../Store/studentstore';
+import SEOHead from '../../components/Common/SEOHead';
 
 /* ── decorative education SVG ────────────────────────────────────────────── */
 const PencilIcon = () => (
@@ -76,6 +77,10 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEOHead 
+        title="Contact Us & Official Enquiries" 
+        description="Official contact details, institutional address, and enquiry desk for Yogbodhi Global Institute." 
+      />
 
       {/* ── Hero (Light & Sleek) ── */}
       <div className="relative bg-white border-b border-gray-100 overflow-hidden">

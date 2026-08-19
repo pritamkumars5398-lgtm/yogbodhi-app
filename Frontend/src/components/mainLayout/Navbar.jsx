@@ -114,9 +114,9 @@ const Navbar = () => {
 
         <div className="relative z-10 overflow-hidden w-full">
           <div className="animate-marquee flex items-center gap-4 text-[10px] sm:text-xs tracking-wide">
-            <span className="flex items-center gap-1.5 font-bold text-gray-700 bg-[#FEF2F2] px-3 py-0.5 rounded-full border border-yellow-100/50">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#ba9d25] animate-pulse"></span>
-              Admissions open for 2025-26 batch
+            <span className="flex items-center gap-1.5 font-bold text-gray-700 bg-orange-50 px-3 py-0.5 rounded-full border border-orange-200/60">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+              Yogbodhi Global Institute — Under Development
             </span>
             <span className="text-gray-300 hidden sm:inline">|</span>
             <Link to="/scholarship" className="group flex items-center gap-1 font-black">

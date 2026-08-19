@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import useStudentStore from '../../../Store/studentstore';
 import api from '../../../services/endpoints';
+import SEOHead from '../../../components/Common/SEOHead';
 
 /* ─── helpers ─────────────────────────────────────────────────────────────── */
 const getImg = (courseId, courseTitle, category) => {
@@ -46,7 +47,7 @@ const customMock = [
     duration: "8 Weeks",
     eligibility: "Directors, CEOs, CFOs, Company Secretaries, Working Professionals",
     certificationType: "Executive Certification of Mastery",
-    faculty: "Dr. Arvind Sharma (Gov. Specialist)"
+    faculty: "Sample Faculty A"
   },
   {
     _id: 'cep_2',
@@ -62,7 +63,7 @@ const customMock = [
     duration: "6 Weeks",
     eligibility: "ESG Officers, Compliance professionals, Legal team leads",
     certificationType: "Professional Development Certificate",
-    faculty: "Prof. Meera Sen"
+    faculty: "Sample Faculty B"
   },
   {
     _id: 'als_1',
@@ -78,7 +79,7 @@ const customMock = [
     duration: "4 Weeks",
     eligibility: "Open to all, adult learners, rural community members",
     certificationType: "Certificate of Participation",
-    faculty: "Mentor Sandeep Roy"
+    faculty: "Sample Faculty C"
   },
   {
     _id: 'als_2',
@@ -94,12 +95,12 @@ const customMock = [
     duration: "10 Weeks",
     eligibility: "Self-directed learners, dropouts, rural entrepreneurs",
     certificationType: "Skill Certificate",
-    faculty: "Guru Rajeshwar Dev"
+    faculty: "Sample Faculty D"
   },
   {
     _id: 'cls_1',
     title: "Employability, Workplace Readiness & Presentation Skills",
-    description: "Supplement your formal college education. Bridge the gap between academic theory and practical communication, leadership, and interview readiness.",
+    description: "Enhance your formal college education. Bridge the gap between academic theory and practical communication, leadership, and interview readiness.",
     category: { name: "Employability & Career Readiness" },
     learningSegment: "CLS",
     price: 3500,
@@ -110,7 +111,7 @@ const customMock = [
     duration: "6 Weeks",
     eligibility: "College students, research scholars, job seekers",
     certificationType: "Career Readiness Certificate",
-    faculty: "Trainer Ananya Iyer"
+    faculty: "Sample Faculty E"
   }
 ];
 
@@ -123,12 +124,12 @@ const ClassroomCourses = () => {
   const { student } = useStudentStore();
   const studentId = student?._id;
 
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(customMock);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedSegment, setSelectedSegment] = useState(initialSegment);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(['All', ...new Set(customMock.map(c => c.category?.name || 'Uncategorized'))]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [search, setSearch] = useState('');
   const [view, setView] = useState('grid'); // 'grid' | 'list'
@@ -138,10 +139,10 @@ const ClassroomCourses = () => {
       setLoading(true);
       let apiCourses = [];
       try {
-        const res = await axios.get(api.fullcourse.getApprovedcourse);
+        const res = await axios.get(api.fullcourse.getApprovedcourse, { timeout: 3500 });
         apiCourses = res.data?.data?.data || res.data?.data || (Array.isArray(res.data) ? res.data : res.data?.courses) || [];
       } catch (err) {
-        console.warn("API load failed, using mock data only");
+        console.warn("API load failed or timed out, utilizing default learning system courses");
       }
 
       // Map API courses to segments to ensure all courses belong somewhere
@@ -156,7 +157,8 @@ const ClassroomCourses = () => {
       setCourses(combined);
       setCategories(['All', ...new Set(combined.map(c => c.category?.name || 'Uncategorized'))]);
     } catch { 
-      setError('Failed to load courses. Please try again.'); 
+      // Do not block page rendering if error occurs; fallback to customMock
+      setCourses(customMock);
     } finally { 
       setLoading(false); 
     }
@@ -165,7 +167,7 @@ const ClassroomCourses = () => {
   const fetchEnrolled = async () => {
     if (!studentId) return;
     try {
-      const res = await axios.get(`${api.student.getStudentProfile}/${studentId}`);
+      const res = await axios.get(`${api.student.getStudentProfile}/${studentId}`, { timeout: 3500 });
       if (res.data?.success) setEnrolledCourses(res.data.data?.enrolledCourses || []);
     } catch { }
   };
@@ -186,10 +188,12 @@ const ClassroomCourses = () => {
 
   /* ── loading ── */
   if (loading) return (
-    <div className="min-h-screen bg-dot-grid flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-10 h-10 border-[3px] border-[#ba9d25] border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="mt-4 text-sm text-gray-500 font-medium">Loading courses…</p>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <SEOHead title="Programmes & Courses" description="Explore CEP, ALS, and CLS institutional programmes offered by Yogbodhi Global Institute." />
+      <div className="text-center p-8 bg-white rounded-3xl shadow-sm border border-gray-100 max-w-sm w-full mx-4">
+        <div className="w-12 h-12 border-4 border-[#0a1b4d] border-t-orange-500 rounded-full animate-spin mx-auto" />
+        <p className="mt-4 text-base font-bold text-gray-800">Loading Programmes & Courses...</p>
+        <p className="text-xs text-gray-500 mt-1">Yogbodhi Global Institute Learning Hub</p>
       </div>
     </div>
   );

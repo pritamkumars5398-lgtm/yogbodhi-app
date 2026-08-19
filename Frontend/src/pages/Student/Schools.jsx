@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, BookOpen, Compass, GraduationCap, Users, Layers, Award, Target, ChevronRight, Activity, Cpu, Briefcase, Scale, Heart } from 'lucide-react';
+import SEOHead from '../../components/Common/SEOHead';
 
 const Schools = () => {
   const schoolsData = [
@@ -24,54 +25,44 @@ const Schools = () => {
     },
     {
       id: 2,
-      name: "School of Law, Public Policy & Governance",
-      focus: "Advancing legal knowledge, regulatory understanding, public institutions, justice, public policy and governance excellence.",
+      name: "School of Law, Public Policy & Management",
+      focus: "Promoting excellence in corporate law, regulatory compliance, public policy and administrative leadership.",
       icon: <Scale className="w-8 h-8 text-[#ba9d25]" />,
       institutes: [
         { name: "Institute of Corporate Laws & Regulations", abbrev: "IOCLR" },
         { name: "Institute of Public Policy & Governance", abbrev: "IOPPG" },
-        { name: "Institute of Legal Studies & Justice", abbrev: "IOLSJ" }
+        { name: "Institute of Business Leadership & Management", abbrev: "IOBLM" }
       ],
       areas: [
-        "Corporate laws and regulations", "Companies law", "Securities and financial regulations",
-        "Constitutional and administrative law", "Public policy", "Public administration",
-        "Legal awareness and access to justice", "Regulatory governance", "Dispute resolution",
-        "Ethics in public institutions", "Legislative and policy studies"
+        "Corporate and commercial law", "Securities law and capital markets", "Regulatory compliance",
+        "Public policy formulation and analysis", "Administrative law and governance", "Strategic management",
+        "Executive decision-making", "Conflict resolution and negotiation", "Global trade and policy"
       ],
-      target: "Lawyers, directors, company secretaries, compliance professionals, public officials, civil service aspirants, policy researchers, social organisations and students of law and governance."
+      target: "Legal professionals, corporate counsel, policy analysts, public administrators, managers and executives."
     },
     {
       id: 3,
-      name: "School of Business, Finance & Entrepreneurship",
-      focus: "Preparing responsible leaders for business management, finance, accounting, entrepreneurship, economic development and infrastructure-led growth.",
+      name: "School of Finance, Commerce & Entrepreneurship",
+      focus: "Fostering financial literacy, modern business acumen, startup management and sustainable entrepreneurship.",
       icon: <Briefcase className="w-8 h-8 text-[#ba9d25]" />,
       institutes: [
-        { name: "Institute of Business Leadership & Management", abbrev: "IOBLM" },
         { name: "Institute of Finance, Accounting & Taxation", abbrev: "IOFAT" },
-        { name: "Institute of Economics & Development Studies", abbrev: "IOEDS" },
         { name: "Institute of Entrepreneurship & Innovation", abbrev: "IOEI" },
-        { name: "Institute of Real Estate & Infrastructure Management", abbrev: "IOREIM" }
+        { name: "Vedic & Modern Business Institute", abbrev: "VMBI" }
       ],
       areas: [
-        "Business management", "Strategic leadership", "Finance and financial management",
-        "Accounting and taxation", "Economics and development", "Entrepreneurship and startups",
-        "Innovation and enterprise development", "Real estate management", "Infrastructure planning",
-        "Project management", "Investment and financial literacy", "Social and rural entrepreneurship"
+        "Financial management and corporate finance", "Accounting and taxation standards", "Auditing and risk management",
+        "Entrepreneurship and venture creation", "Innovation management", "Small business development",
+        "Vedic and traditional business principles", "Ethical commerce"
       ],
-      target: "Entrepreneurs, startup founders, business owners, managers, finance professionals, accountants, consultants, real-estate professionals, project leaders and students preparing for business careers."
+      target: "Entrepreneurs, startup founders, finance professionals, accountants, business owners and commerce students."
     },
     {
       id: 4,
-      name: "School of Technology, AI & Digital Innovation",
-      focus: "Driving digital transformation, artificial intelligence, technological innovation and technology-enabled education.",
+      name: "School of Emerging Technologies & Applied Sciences",
+      focus: "Empowering professionals and learners with skills in artificial intelligence, digital transformation and technological innovation.",
       icon: <Cpu className="w-8 h-8 text-[#ba9d25]" />,
       institutes: [
-        { name: "Institute of Artificial Intelligence & Emerging Technologies", abbrev: "IOAIET" },
-        { name: "Institute of Digital Learning & Educational Technology", abbrev: "IODLET" }
-      ],
-      areas: [
-        "Artificial intelligence", "Generative AI", "Emerging technologies", "Data and digital literacy",
-        "Digital transformation", "AI governance and ethics", "Educational technology",
         "Online course development", "Digital teaching methods", "Learning-management systems",
         "Cyber awareness", "Technology for business and governance"
       ],
@@ -120,6 +111,10 @@ const Schools = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
+      <SEOHead 
+        title="Six Schools & Constituent Institutes" 
+        description="Explore the Six Academic Schools and constituent Institutes of Yogbodhi Global Institute across Corporate Governance, Law, Technology, Finance, Human Development, and Yoga." 
+      />
       {/* Hero Header */}
       <section className="relative py-16 bg-cover bg-center overflow-hidden text-white" style={{ backgroundImage: "linear-gradient(to right, rgba(15, 23, 42, 0.45) 30%, rgba(15, 23, 42, 0.15) 100%), url('/assets/schools_hero.jpg')" }}>
         <div className="absolute top-0 right-0 w-1/3 h-full bg-[#ba9d25]/10 rounded-l-full blur-3xl pointer-events-none" />

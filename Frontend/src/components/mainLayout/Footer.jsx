@@ -142,24 +142,34 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="text-white text-lg font-bold mb-6 tracking-wide">
               Newsletter
-              <span className="block w-20 h-1 bg-gradient-to-r from-[#ba9d25] to-transparent mt-2 mx-auto md:mx-0 rounded-full"></span>
+              <span className="block w-20 h-1 bg-gradient-to-r from-orange-500 to-transparent mt-2 mx-auto md:mx-0 rounded-full"></span>
             </h3>
             <p className="text-sm mb-4 text-gray-400 max-w-xs mx-auto md:mx-0">
-              Subscribe to get the latest updates and exclusive offers delivered to your inbox.
+              Subscribe to receive official Yogbodhi Global Institute research and programme updates.
             </p>
-            <form className="flex flex-col gap-3 max-w-xs mx-auto md:mx-0" onSubmit={(e) => e.preventDefault()}>
+            <form 
+              className="flex flex-col gap-3 max-w-xs mx-auto md:mx-0" 
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Thank you for subscribing to Yogbodhi Global Institute updates!");
+              }}
+            >
               <div className="relative group">
+                <label htmlFor="footer-newsletter-email" className="sr-only">Email Address for Newsletter</label>
                 <input
+                  id="footer-newsletter-email"
+                  name="footerNewsletterEmail"
                   type="email"
                   placeholder="Enter your email address"
-                  className="w-full bg-gray-800/50 text-white text-sm rounded-xl pl-4 pr-10 py-3 outline-none border border-gray-700 focus:border-[#ba9d25] focus:bg-gray-800 transition-all duration-300 placeholder-gray-500"
+                  aria-label="Email Address for Newsletter"
+                  className="w-full bg-gray-800/50 text-white text-sm rounded-xl pl-4 pr-10 py-3 outline-none border border-gray-700 focus:border-orange-500 focus:bg-gray-800 transition-all duration-300 placeholder-gray-500"
                   required
                 />
-                <Mail size={18} className="absolute right-3 top-3.5 text-dark group-focus-within:text-[#ba9d25] transition-colors" />
+                <Mail size={18} className="absolute right-3 top-3.5 text-gray-400 group-focus-within:text-orange-500 transition-colors" />
               </div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[#ba9d25] to-[#a88c21] hover:from-[#a88c21] hover:to-[#947b1c] text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-[0_4px_14px_rgba(186,157,37,0.25)] hover:shadow-[0_6px_20px_rgba(186,157,37,0.4)] hover:-translate-y-0.5 active:translate-y-0"
+                className="w-full bg-[#0a1b4d] hover:bg-blue-900 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-md hover:-translate-y-0.5"
               >
                 Subscribe Now
               </button>
@@ -170,15 +180,15 @@ const Footer = () => {
 
         {/* Disclaimer row */}
         <div className="border-t border-gray-800 pt-6 mt-8">
-          <p className="text-[11px] leading-relaxed text-gray-500 text-justify">
-            <span className="font-bold text-gray-400">Important Disclaimer:</span> Yogbodhi Global Institute is a multidisciplinary learning and professional-development platform offering continuing education, alternative learning and complementary learning programmes. Unless specifically stated otherwise, its programmes and certificates are intended for professional development, skill enhancement, continuing education and personal enrichment. They should not be represented as government-recognized degrees, university qualifications or statutory professional licences. Any programme offered in collaboration with a recognised university, professional body or authorised institution should separately display the name, role and recognition status of the collaborating institution.
+          <p className="text-[11px] leading-relaxed text-gray-400 text-justify font-medium">
+            <span className="font-bold text-gray-300">Important Institutional Disclosure:</span> Yogbodhi Global Institute is a multidisciplinary learning and professional-development platform offering continuing education (CEP), alternative learning (ALS) and complementary learning (CLS) programmes. Unless specifically stated otherwise, its programmes and certificates are intended for professional development, skill enhancement, continuing education and personal enrichment. They should not be represented as government-recognized degrees or statutory professional licences.
           </p>
         </div>
 
         {/* Footer Bottom */}
         <div className="border-t border-gray-800 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs sm:text-sm text-gray-500 text-center md:text-left">
-            © {currentYear} Yogbodhi Global. All rights reserved.
+          <p className="text-xs sm:text-sm text-gray-400 text-center md:text-left">
+            © {currentYear} Yogbodhi Global Institute. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
             <Link to="/termsandconditions" className="text-gray-500 hover:text-[#ba9d25] transition-colors duration-200">

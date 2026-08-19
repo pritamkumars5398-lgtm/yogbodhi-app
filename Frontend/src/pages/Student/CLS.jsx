@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from '../../components/Common/SEOHead';
 import {
   GraduationCap, Award, Users, CheckCircle, Calendar, ShieldCheck,
   ChevronDown, BookOpen, Target, Briefcase, Scale, Heart, Cpu,
@@ -97,6 +98,10 @@ const CLS = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
+      <SEOHead 
+        title="Complementary Learning System (CLS)" 
+        description="CLS at Yogbodhi Global Institute supplements formal college and school education with practical workplace skills, mentoring, and interview readiness." 
+      />
 
       {/* Hero Banner Section */}
       <section className="relative py-10 bg-cover bg-center overflow-hidden text-white" style={{ backgroundImage: "linear-gradient(to right, rgba(15, 23, 42, 0.9) 40%, rgba(15, 23, 42, 0) 100%), url('/assets/cls_hero.jpg')" }}>

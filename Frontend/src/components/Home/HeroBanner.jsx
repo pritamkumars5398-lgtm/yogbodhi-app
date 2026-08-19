@@ -1,10 +1,10 @@
 import React from 'react';
-import { GraduationCap, BookOpen, Stethoscope, User, Atom, FlaskConical, Calculator, Dna, ArrowRight, PlayCircle, Star } from 'lucide-react';
+import { GraduationCap, BookOpen, Stethoscope, User, Atom, FlaskConical, Calculator, Dna, ArrowRight, PlayCircle, Star, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroBanner = () => {
   return (
-    <div className="relative w-full bg-gradient-to-br from-blue-50 via-white to-orange-50 overflow-hidden min-h-[600px] flex items-center">
+    <div className="relative w-full bg-gradient-to-br from-blue-50 via-white to-orange-50 overflow-hidden min-h-[540px] md:min-h-[580px] flex items-center pb-12 pt-2">
 
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -13,7 +13,7 @@ const HeroBanner = () => {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNlN2U1ZTQiLz48L3N2Zz4=')] opacity-50"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 py-5 md:py-1 lg:pt-0">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-20 pt-2 pb-6 md:pb-8">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center lg:items-start">
 
@@ -21,62 +21,64 @@ const HeroBanner = () => {
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-2 lg:pt-0">
 
             {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 px-4 rounded-full bg-white/80 backdrop-blur-sm border border-orange-200 shadow-sm animate-fade-in-up">
-              <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-ping"></span>
-              <span className="text-sm font-semibold text-orange-600 tracking-wide uppercase">Admissions Open 2025-26</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-orange-200 shadow-sm animate-fade-in-up">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-orange-500 animate-ping"></span>
+              <span className="text-xs md:text-sm font-bold text-orange-600 tracking-wide uppercase">Yogbodhi Global Institute — Under Development</span>
             </div>
 
-            {/* Main Title & Logo */}
+            {/* Main Title & Slogan */}
             <div className="space-y-3">
               <div className="flex items-center justify-center lg:justify-start gap-3">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl my-3 font-black tracking-tight text-[#0a1b4d]" style={{ fontFamily: 'Times New Roman, serif' }}>
-                  YOGBODHI <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500 italic">GLOBAL</span>
+                <h1 className="text-3xl md:text-5xl lg:text-6xl my-3 font-black tracking-tight text-[#0a1b4d]" style={{ fontFamily: 'Times New Roman, serif' }}>
+                  YOGBODHI <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500 italic">GLOBAL INSTITUTE</span>
                 </h1>
               </div>
 
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 leading-tight">
-                Master the Roots, <br className="hidden lg:block" />
-                <span className="relative inline-block mt-2">
-                  Rule the Results.
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+                Learning for Life. <br className="hidden lg:block" />
+                <span className="relative inline-block mt-2 text-orange-600">
+                  Leadership for the Future.
                   <div className="absolute -bottom-2 left-0 w-full h-3 bg-orange-200/60 -z-10 rounded-sm transform -rotate-1"></div>
                 </span>
               </h2>
 
-              <p className="text-gray-600 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed ">
-                Empowering students in Class 9-12, Foundation, NEET & JEE with expert guidance in Physics, Chemistry, Maths & Biology.
+              <p className="text-gray-600 text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                Pioneering principal learning systems (CEP, ALS & CLS) across six schools to empower professionals, directors, students, educators, and institutions worldwide.
               </p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 my-2 ">
-              <Link to="/course" className="pl-2 px-1 py-2 rounded-full bg-[#0a1b4d] text-white font-semibold text-l hover:bg-blue-900 transition-all duration-300 shadow-[0_8px_20px_rgba(10,27,77,0.25)] hover:shadow-[0_10px_25px_rgba(10,27,77,0.35)] hover:-translate-y-1 flex items-center group">
-                Explore Courses
-                <ArrowRight size={20} className="group-hover:translate-x transition-transform" />
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 my-2">
+              <Link to="/course" className="px-6 py-3 rounded-full bg-[#0a1b4d] text-white font-semibold text-sm md:text-base hover:bg-blue-900 transition-all duration-300 shadow-md hover:-translate-y-0.5 flex items-center gap-2 group">
+                Explore Learning Systems
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/contact" className="px-2 py-2 rounded-full bg-[#0a1b4d] text-white border-2 border-gray-100 font-semibold text-l hover:border-orange-200 hover:bg-orange-500 transition-all duration-300 shadow-sm flex items-center gap-2 group">
-                <PlayCircle size={22} className="text-orange-50 group-hover:scale-110 transition-transform" />
-                Book Demo Class
+              <Link to="/contact" className="px-6 py-3 rounded-full bg-white text-[#0a1b4d] border-2 border-[#0a1b4d] font-semibold text-sm md:text-base hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all duration-300 shadow-sm flex items-center gap-2 group">
+                <PlayCircle size={20} className="group-hover:scale-110 transition-transform" />
+                Institutional Enquiries
               </Link>
             </div>
 
-            {/* Stats / Trust */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 pt-6 border-t border-gray-200/60 w-full justify-center lg:justify-start">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map(i => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center overflow-hidden z-10">
-                    <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="student" className="w-full h-full object-cover" />
+            {/* Verified Institutional Pillar Bar */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 pt-5 border-t border-gray-200/60 w-full justify-center lg:justify-start">
+              <div className="flex -space-x-2">
+                {[
+                  { icon: BookOpen, bg: 'bg-blue-600' },
+                  { icon: GraduationCap, bg: 'bg-orange-500' },
+                  { icon: Atom, bg: 'bg-amber-600' },
+                  { icon: ShieldCheck, bg: 'bg-indigo-600' }
+                ].map((item, i) => (
+                  <div key={i} className={`w-9 h-9 rounded-full border-2 border-white ${item.bg} text-white flex items-center justify-center shadow-sm z-10`}>
+                    <item.icon size={16} />
                   </div>
                 ))}
               </div>
               <div className="flex flex-col items-center sm:items-start">
-                <div className="flex items-center gap-1 text-orange-400">
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
+                <div className="flex items-center gap-1 text-orange-500 font-bold text-xs uppercase tracking-wider">
+                  <Star size={14} fill="currentColor" />
+                  <span>Verified Learning Ecosystem</span>
                 </div>
-                <span className="text-sm font-medium text-gray-700">Trusted by 1000+ Students</span>
+                <span className="text-xs font-semibold text-gray-700">Future-Ready LMS Facilities & Academic Governance</span>
               </div>
             </div>
 
@@ -144,7 +146,7 @@ const HeroBanner = () => {
       </div>
 
       {/* Bottom Wave Pattern */}
-      <div className="absolute bottom-0 left-0 w-full z-30 pointer-events-none transform translate-y-[1px]">
+      <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none transform translate-y-[1px]">
         <svg viewBox="0 0 1440 120" className="w-full h-auto block" preserveAspectRatio="none">
           <path d="M0,60 C320,120 420,0 720,60 C1020,120 1120,0 1440,60 L1440,70 L0,70 Z" fill="#f28e2b" />
           <path d="M0,65 C320,125 420,5 720,65 C1020,125 1120,5 1440,65 L1440,120 L0,120 Z" fill="#0a1b4d" />

@@ -1,10 +1,10 @@
 import React from 'react';
 
 const stats = [
-  { value: '10,000+', label: 'Students Enrolled', color: '#ba9d25' }, // Red
-  { value: '98%', label: 'Selection Rate', color: '#ba9d25' }, // Red
-  { value: '50+', label: 'Expert Faculty', color: '#ba9d25' }, // Red
-  { value: '10+', label: 'Years of Excellence', color: '#F1C40F' }, // Yellow
+  { value: '3', label: 'Principal Learning Systems (CEP, ALS, CLS)', color: '#ba9d25' },
+  { value: '6', label: 'Schools & Constituent Institutes', color: '#0a1b4d' },
+  { value: 'Unified', label: 'Yogbodhi Ecosystem & Governance', color: '#ba9d25' },
+  { value: 'Future-Ready', label: 'LMS Facilities & Platform', color: '#0a1b4d' },
 ];
 
 const StatsBar = () => (

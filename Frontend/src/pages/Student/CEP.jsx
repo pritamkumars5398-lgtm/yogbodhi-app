@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from '../../components/Common/SEOHead';
 import {
   GraduationCap, Award, Users, CheckCircle, Calendar, ShieldCheck,
   ChevronDown, BookOpen, Target, Briefcase, Scale, Heart, Cpu,
@@ -176,6 +177,10 @@ const CEP = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
+      <SEOHead 
+        title="Continuing Education Programme (CEP)" 
+        description="CEP at Yogbodhi Global Institute offers structured executive certifications for directors, professionals, and corporate leaders across governance, law, ESG, and technology." 
+      />
 
       {/* Hero Banner Section */}
       <section className="relative py-10 bg-cover bg-center overflow-hidden text-white" style={{ backgroundImage: "linear-gradient(to right, rgba(15, 23, 42, 0.9) 40%, rgba(15, 23, 42, 0) 100%), url('/assets/cep_hero.jpg')" }}>

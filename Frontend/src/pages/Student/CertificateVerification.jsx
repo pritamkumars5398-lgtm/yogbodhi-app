@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ShieldCheck, CheckCircle, AlertTriangle, Search } from 'lucide-react';
+import SEOHead from '../../components/Common/SEOHead';
 
 const CertificateVerification = () => {
   const [certId, setCertId] = useState('');
@@ -8,22 +9,22 @@ const CertificateVerification = () => {
 
   const mockCerts = {
     "YGI-CEP-2025-091": {
-      recipient: "Pritam Kumar",
+      recipient: "Sample Learner A",
       programme: "Advanced Corporate Governance & Board Effectiveness",
       segment: "Continuing Education Programme (CEP)",
       issuedDate: "2025-10-15",
       status: "Verified",
-      collaboratingPartner: "Society of Corporate Compliance Professionals"
+      collaboratingPartner: "Yogbodhi Executive Learning Board"
     },
     "YGI-ALS-2025-114": {
-      recipient: "Sneha Gupta",
+      recipient: "Sample Learner B",
       programme: "Practical Entrepreneurship & Vocational Skills",
       segment: "Alternative Learning System (ALS)",
       issuedDate: "2025-11-20",
       status: "Verified"
     },
     "YGI-CLS-2025-502": {
-      recipient: "Amit Sen",
+      recipient: "Sample Learner C",
       programme: "Employability, Workplace Readiness & Presentation Skills",
       segment: "Complementary Learning System (CLS)",
       issuedDate: "2025-12-05",
@@ -43,21 +44,29 @@ const CertificateVerification = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4">
+      <SEOHead 
+        title="Official Certificate Verification Portal" 
+        description="Verify credentials and certificates issued by Yogbodhi Global Institute for CEP, ALS, and CLS learning systems." 
+      />
       <div className="max-w-xl mx-auto bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden">
-        <div className="bg-gradient-to-r from-gray-950 to-gray-900 p-8 text-white text-center">
-          <ShieldCheck className="text-[#ba9d25] w-12 h-12 mx-auto mb-4" />
-          <h1 className="text-3xl font-black">Certificate Verification</h1>
-          <p className="text-gray-400 text-sm mt-2">Verify the validity of Yogbodhi Global Institute issued credentials</p>
+        <div className="bg-gradient-to-r from-[#0a1b4d] to-gray-900 p-8 text-white text-center">
+          <ShieldCheck className="text-orange-500 w-12 h-12 mx-auto mb-4" />
+          <h1 className="text-3xl font-black">Certificate Verification Portal</h1>
+          <p className="text-gray-300 text-sm mt-2">Verify official credentials issued by Yogbodhi Global Institute</p>
         </div>
 
         <div className="p-8 space-y-6">
           <form onSubmit={handleVerify} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Certificate ID</label>
+              <label htmlFor="cert-id-input" className="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2">Certificate ID Number <span className="text-orange-500">*</span></label>
               <div className="relative">
-                <Search className="absolute left-3 top-3.5 text-gray-400 w-4.5 h-4.5" />
+                <Search className="absolute left-3.5 top-3.5 text-gray-400 w-4.5 h-4.5" />
                 <input
+                  id="cert-id-input"
+                  name="certId"
                   type="text"
+                  required
+                  aria-label="Certificate ID Number"
                   required
                   value={certId}
                   onChange={e => setCertId(e.target.value)}

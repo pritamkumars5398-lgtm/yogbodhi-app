@@ -2,122 +2,126 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import api from '../../services/endpoints';
 import VideoCarousel from './VideoCarousel';
+import { User, Star } from 'lucide-react';
 
-/* alternate red/blue per card */
-const cardAccents = ['#ba9d25', '#a88c21', '#947b1c'];
+/* alternate accent per card */
+const cardAccents = ['#0a1b4d', '#ba9d25', '#0284c7'];
+
+const defaultInstitutionalTestimonials = [
+  {
+    id: 'inst_1',
+    name: 'Sample Participant A',
+    achievement: 'Independent Director & Governance Fellow',
+    quote: 'The Continuing Education Programme (CEP) provided invaluable insights into executive board oversight, compliance standards, and risk management.',
+    category: 'CEP - Governance',
+    accent: '#0a1b4d',
+  },
+  {
+    id: 'inst_2',
+    name: 'Sample Learner B',
+    achievement: 'Skill Circle Lead & Entrepreneur',
+    quote: 'The Alternative Learning System (ALS) offered a flexible, community-based approach that bridged traditional knowledge with digital tools.',
+    category: 'ALS - Vocational',
+    accent: '#ba9d25',
+  },
+  {
+    id: 'inst_3',
+    name: 'Sample Scholar C',
+    achievement: 'Research Fellow & Career Track Scholar',
+    quote: 'Complementary Learning System (CLS) strengthened my formal academic degree with practical workplace readiness and presentation skills.',
+    category: 'CLS - Employability',
+    accent: '#0284c7',
+  }
+];
 
 const TestimonialsPage = () => {
-  const [testimonials, setTestimonials] = useState([]);
-  const [loading,      setLoading]      = useState(true);
-  const [error,        setError]        = useState(null);
+  const [testimonials, setTestimonials] = useState(defaultInstitutionalTestimonials);
+  const [loading, setLoading] = useState(true);
 
   const GetTestinomial = async () => {
     try {
       setLoading(true);
-      const res = await axios.post(api.testimonial.getTestimonial);
-      if (res.data?.data && Array.isArray(res.data.data)) {
+      const res = await axios.post(api.testimonial.getTestimonial, {}, { timeout: 3500 });
+      if (res.data?.data && Array.isArray(res.data.data) && res.data.data.length > 0) {
         setTestimonials(res.data.data.map((item, i) => ({
           id: item._id, name: item.name, image: item.image,
-          achievement: item.achievement, rating: parseInt(item.rating) || 5,
-          quote: item.review, category: item.Course,
+          achievement: item.achievement || 'Institutional Fellow', rating: parseInt(item.rating) || 5,
+          quote: item.review, category: item.Course || 'Yogbodhi Ecosystem',
           accent: cardAccents[i % cardAccents.length],
         })));
+      } else {
+        setTestimonials(defaultInstitutionalTestimonials);
       }
-      setError(null);
-    } catch { setError('Failed to load testimonials'); }
-    finally  { setLoading(false); }
+    } catch { 
+      // Silently fall back to default institutional testimonials
+      setTestimonials(defaultInstitutionalTestimonials); 
+    }
+    finally { setLoading(false); }
   };
 
   useEffect(() => { GetTestinomial(); }, []);
 
-  if (loading) return <div className="py-20 flex items-center justify-center"><div className="animate-spin rounded-full h-7 w-7 border-b-2 border-[#ba9d25]" /></div>;
-  if (error)   return (
-    <div className="py-16 flex items-center justify-center">
-      <div className="text-center">
-        <p className="text-gray-400 text-sm mb-3">{error}</p>
-        <button onClick={GetTestinomial} className="px-4 py-2 bg-[#ba9d25] text-white rounded-lg text-xs hover:opacity-90">Try Again</button>
-      </div>
-    </div>
-  );
+  if (loading) return <div className="py-16 flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0a1b4d]" /></div>;
 
   return (
     <>
       {/* Testimonials */}
-      <div className="bg-dot-grid py-16 px-4 sm:px-6 lg:px-8">
+      <div className="bg-gradient-to-b from-gray-50 to-white py-16 px-4 sm:px-6 lg:px-8 border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
 
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
-              <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-widest mb-3">Success Stories</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">What our students say</h2>
+              <p className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2">Institutional Insights & Feedback</p>
+              <h2 className="text-3xl md:text-4xl font-black text-[#0a1b4d]">Learner Experience & Outcomes</h2>
             </div>
-            <div className="flex gap-8 flex-shrink-0">
-              <div className="text-center">
-                <div className="text-2xl font-black text-[#ba9d25]">10,000+</div>
-                <div className="text-xs text-gray-400 mt-0.5">Happy Students</div>
+            <div className="flex gap-6 flex-shrink-0">
+              <div className="text-center px-4 py-2 bg-white rounded-xl border border-gray-100 shadow-sm">
+                <div className="text-xl font-black text-[#0a1b4d]">CEP | ALS | CLS</div>
+                <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-0.5">3 Learning Systems</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-black text-[#ba9d25]">98%</div>
-                <div className="text-xs text-gray-400 mt-0.5">Success Rate</div>
+              <div className="text-center px-4 py-2 bg-white rounded-xl border border-gray-100 shadow-sm">
+                <div className="text-xl font-black text-orange-600">6 Schools</div>
+                <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mt-0.5">Multidisciplinary</div>
               </div>
             </div>
           </div>
 
-          {testimonials.length === 0 ? (
-            <p className="text-gray-400 text-sm text-center py-10">No testimonials yet.</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-              {testimonials.map((t, i) => {
-                const isWide = i % 3 === 0;
-                const isDark = false; // Always light
-                return (
-                  <div key={t.id}
-                    className={`
-                      ${isWide ? 'md:col-span-7' : 'md:col-span-5'}
-                      ${isDark ? 'bg-[#0a1628]' : 'bg-white'}
-                      rounded-2xl p-6 flex flex-col justify-between border
-                      ${isDark ? 'border-blue-900/30' : 'border-gray-100'}
-                      hover:shadow-md transition-shadow
-                    `}
-                  >
-                    {/* Accent top line */}
-                    <div className="w-8 h-1 rounded-full mb-4" style={{ backgroundColor: t.accent }} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t) => (
+              <div key={t.id}
+                className="bg-white rounded-3xl p-6 flex flex-col justify-between border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+              >
+                {/* Accent top bar */}
+                <div className="w-12 h-1.5 rounded-full mb-4" style={{ backgroundColor: t.accent }} />
 
-                    {/* Large quote */}
-                    <div className="text-5xl font-black leading-none mb-3 opacity-40" style={{ color: t.accent }}>"</div>
+                <p className="text-sm leading-relaxed text-gray-600 flex-1 mb-6 italic">
+                  "{t.quote}"
+                </p>
 
-                    <p className={`text-sm leading-relaxed flex-1 mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                      {t.quote}
-                    </p>
-
-                    <div className={`flex items-center gap-3 pt-4 border-t ${isDark ? 'border-white/10' : 'border-gray-100'}`}>
-                      <img
-                        src={t.image} alt={t.name}
-                        className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-white/20"
-                        onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=${t.accent.replace('#','')}&color=fff`; }}
-                      />
-                      <div className="flex-1 min-w-0">
-                        <p className={`font-semibold text-sm truncate ${isDark ? 'text-white' : 'text-gray-900'}`}>{t.name}</p>
-                        <p className="text-xs text-gray-400 truncate">{t.achievement}</p>
-                      </div>
-                      <span className="flex-shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full text-white" style={{ backgroundColor: t.accent }}>
-                        {t.category}
-                      </span>
-                    </div>
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 text-[#0a1b4d] flex items-center justify-center flex-shrink-0 font-bold border border-gray-200">
+                    <User size={18} />
                   </div>
-                );
-              })}
-            </div>
-          )}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-sm text-gray-900 truncate">{t.name}</p>
+                    <p className="text-xs text-gray-500 truncate">{t.achievement}</p>
+                  </div>
+                  <span className="flex-shrink-0 text-[10px] font-bold px-2.5 py-1 rounded-full text-white uppercase tracking-wider" style={{ backgroundColor: t.accent }}>
+                    {t.category}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Video Stories */}
-      <div className="bg-gradient-to-br from-yellow-50 to-green-50 py-14 px-4 sm:px-6 lg:px-8">
+      <div className="bg-gradient-to-br from-gray-900 to-[#0a1b4d] text-white py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <p className="text-xs font-bold text-[#ba9d25] uppercase tracking-widest mb-3">Watch & Learn</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Success Stories in Action</h2>
+          <div className="mb-8 text-center md:text-left">
+            <p className="text-xs font-bold text-orange-400 uppercase tracking-widest mb-2">Watch & Explore</p>
+            <h2 className="text-2xl md:text-3xl font-bold">Institutional Highlights in Action</h2>
           </div>
           <VideoCarousel />
         </div>
