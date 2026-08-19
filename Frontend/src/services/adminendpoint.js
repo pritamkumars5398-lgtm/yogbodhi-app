@@ -1,5 +1,5 @@
 
-const Base_Url = import.meta.env.VITE_BASE_URL
+const Base_Url = import.meta.env.VITE_BASE_URL || "/api";
 
 const api ={
     admin:{
