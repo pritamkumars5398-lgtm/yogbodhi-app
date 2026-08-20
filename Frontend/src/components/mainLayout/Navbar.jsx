@@ -1,15 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   ChevronDown, BookOpen, GraduationCap, Compass, ShieldCheck, 
-  Menu, X, Landmark, User, Sparkles 
+  Menu, X, Landmark, User, Sparkles, LogOut 
 } from 'lucide-react';
+import useStudentStore from '../../Store/studentstore';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { student, isAuthenticated, logout } = useStudentStore();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [learningDropdownOpen, setLearningDropdownOpen] = useState(false);
-  const location = useLocation();
+  const [tokenExists, setTokenExists] = useState(false);
+
+  useEffect(() => {
+    const t = localStorage.getItem('token') || localStorage.getItem('studentToken');
+    setTokenExists(Boolean(t));
+  }, [location, isAuthenticated]);
+
+  const isLoggedIn = isAuthenticated || tokenExists || Boolean(student?._id);
+
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("studentToken");
+    setTokenExists(false);
+    navigate('/stdlogin');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -142,10 +162,29 @@ const Navbar = () => {
 
             {/* Action Buttons */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link to="/stdlogin" className="px-4 py-2 rounded-xl text-xs font-bold text-[#0a1b4d] border border-gray-200 hover:border-[#0a1b4d] hover:bg-gray-50 transition-all flex items-center gap-1.5">
-                <User size={14} />
-                Student Portal
-              </Link>
+              {isLoggedIn ? (
+                <>
+                  <Link 
+                    to={student?.role === 'admin' ? '/admin' : student?.role === 'instructor' ? '/instructor/dashboard' : '/dashboard'} 
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-[#0a1b4d] border border-gray-200 hover:border-[#0a1b4d] hover:bg-gray-50 transition-all flex items-center gap-1.5"
+                  >
+                    <User size={14} />
+                    My Portal
+                  </Link>
+                  <button 
+                    onClick={handleLogout} 
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-red-600 border border-red-200 bg-red-50 hover:bg-red-100 transition-all flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <LogOut size={14} />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link to="/stdlogin" className="px-4 py-2 rounded-xl text-xs font-bold text-[#0a1b4d] border border-gray-200 hover:border-[#0a1b4d] hover:bg-gray-50 transition-all flex items-center gap-1.5">
+                  <User size={14} />
+                  Login Portal
+                </Link>
+              )}
               <Link to="/enquiry" className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0a1b4d] hover:bg-blue-900 shadow-sm transition-all flex items-center gap-1.5">
                 Enquiry Desk
               </Link>
@@ -189,9 +228,26 @@ const Navbar = () => {
               Contact Us
             </Link>
             <div className="pt-2 flex flex-col gap-2">
-              <Link to="/stdlogin" className="w-full py-2.5 rounded-xl text-xs font-bold text-center text-[#0a1b4d] border border-gray-200">
-                Student Portal Sign In
-              </Link>
+              {isLoggedIn ? (
+                <>
+                  <Link 
+                    to={student?.role === 'admin' ? '/admin' : student?.role === 'instructor' ? '/instructor/dashboard' : '/dashboard'} 
+                    className="w-full py-2.5 rounded-xl text-xs font-bold text-center text-[#0a1b4d] border border-gray-200"
+                  >
+                    My Portal
+                  </Link>
+                  <button 
+                    onClick={handleLogout} 
+                    className="w-full py-2.5 rounded-xl text-xs font-bold text-center text-red-600 bg-red-50 border border-red-200"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link to="/stdlogin" className="w-full py-2.5 rounded-xl text-xs font-bold text-center text-[#0a1b4d] border border-gray-200">
+                  Login Portal
+                </Link>
+              )}
               <Link to="/enquiry" className="w-full py-2.5 rounded-xl text-xs font-bold text-center text-white bg-[#0a1b4d]">
                 Institutional Enquiry Desk
               </Link>
