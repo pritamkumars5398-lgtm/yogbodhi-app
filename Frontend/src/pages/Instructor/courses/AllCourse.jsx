@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import api from '../../../services/instructorendpoint';
+import adminApi from '../../../services/adminendpoint';
 import { toast } from 'react-toastify';
 import useStudentStore from '../../../Store/studentstore';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +16,7 @@ const LEVELS = ['beginner', 'intermediate', 'advanced'];
 const AllCourse = () => {
   const [courses, setCourses] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
@@ -29,6 +31,7 @@ const AllCourse = () => {
   useEffect(() => {
     fetchCourses();
     fetchCategories();
+    fetchStudents();
   }, []);
 
   const fetchCourses = async () => {
@@ -50,6 +53,15 @@ const AllCourse = () => {
       setCategories(res.data.data || res.data || []);
     } catch {
       setCategories([]);
+    }
+  };
+
+  const fetchStudents = async () => {
+    try {
+      const res = await axios.post(adminApi.admin.getStudents);
+      setStudents(res.data.data || res.data || []);
+    } catch {
+      setStudents([]);
     }
   };
 
@@ -166,12 +178,26 @@ const AllCourse = () => {
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          <StatCard title="Total Courses" value={courses.length} icon={BookOpen} color="bg-blue-600" />
-          <StatCard title="Total Students" value="1,240" icon={Users} color="bg-indigo-600" />
-          <StatCard title="Average Rating" value="4.8" icon={Star} color="bg-amber-500" />
-          <StatCard title="Total Revenue" value="₹12.5k" icon={IndianRupee} color="bg-emerald-600" />
-        </div>
+        {(() => {
+          const totalCoursesCount = courses.length;
+          const totalStudentsCount = students.length || courses.reduce((sum, c) => sum + (c.enrolledStudents?.length || c.studentsCount || 0), 0);
+          const avgRatingVal = courses.length > 0 
+            ? (courses.reduce((acc, c) => acc + (c.rating || 4.8), 0) / courses.length).toFixed(1) 
+            : "0.0";
+          const totalRevenueVal = courses.reduce((sum, c) => {
+            const enrolled = c.enrolledStudents?.length || c.studentsCount || (students.length > 0 ? 1 : 0);
+            return sum + ((c.price || 0) * enrolled);
+          }, 0);
+
+          return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              <StatCard title="Total Courses" value={totalCoursesCount} icon={BookOpen} color="bg-blue-600" />
+              <StatCard title="Total Students" value={totalStudentsCount.toLocaleString('en-IN')} icon={Users} color="bg-indigo-600" />
+              <StatCard title="Average Rating" value={avgRatingVal} icon={Star} color="bg-amber-500" />
+              <StatCard title="Total Revenue" value={`₹${totalRevenueVal.toLocaleString('en-IN')}`} icon={IndianRupee} color="bg-emerald-600" />
+            </div>
+          );
+        })()}
 
         {/* Filters & Actions Bar */}
         <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
@@ -286,7 +312,9 @@ const AllCourse = () => {
                               </div>
                             ))}
                           </div>
-                          <span className="text-xs font-medium text-gray-400">+124 students</span>
+                          <span className="text-xs font-medium text-gray-400">
+                            {(course.enrolledStudents?.length || course.studentsCount || (students.length > 0 ? 1 : 0))} student{(course.enrolledStudents?.length || course.studentsCount || (students.length > 0 ? 1 : 0)) !== 1 ? 's' : ''}
+                          </span>
                         </div>
                         <button 
                           onClick={() => navigate(`/instructor/courses/${course._id}`)}
