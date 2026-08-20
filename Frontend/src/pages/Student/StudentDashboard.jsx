@@ -85,13 +85,6 @@ const StudentDashboard = () => {
             <Link to="/verify-certificate" className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl text-xs transition-all border border-gray-200">
               Verify Credentials
             </Link>
-            <button
-              onClick={handleLogout}
-              className="px-5 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-xl text-xs transition-all border border-red-200 flex items-center gap-1.5 cursor-pointer"
-            >
-              <LogOut size={14} />
-              Logout
-            </button>
           </div>
         </div>
 
