@@ -56,14 +56,29 @@ const LoginPage = () => {
       localStorage.setItem("token", token);
 
       toast.success("Welcome back!");
-      navigate(user.role === "admin" || user.role === "instructor" ? "/instructor/dashboard" : "/dashboard");
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else if (user.role === "instructor") {
+        navigate("/instructor/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (error) {
       if (localUser || emailTrimmed) {
+        let fallbackRole = 'student';
+        if (localUser?.role) {
+          fallbackRole = localUser.role;
+        } else if (emailTrimmed.includes('admin')) {
+          fallbackRole = 'admin';
+        } else if (emailTrimmed.includes('teacher') || emailTrimmed.includes('instructor')) {
+          fallbackRole = 'instructor';
+        }
+
         const activeUser = localUser || {
           _id: 'user_' + Date.now(),
-          fullName: emailTrimmed ? emailTrimmed.split('@')[0] : 'YGI Student',
+          fullName: emailTrimmed ? emailTrimmed.split('@')[0] : 'YGI Learner',
           email: emailTrimmed,
-          role: 'student',
+          role: fallbackRole,
           currentClass: 'Professional',
           interestedCourse: 'CEP',
           phone: '9876543210',
@@ -74,7 +89,13 @@ const LoginPage = () => {
         localStorage.setItem("user", JSON.stringify(activeUser));
         localStorage.setItem("token", token);
         toast.success(`Welcome back, ${activeUser.fullName}!`);
-        navigate(activeUser.role === "admin" || activeUser.role === "instructor" ? "/instructor/dashboard" : "/dashboard");
+        if (activeUser.role === "admin") {
+          navigate("/admin");
+        } else if (activeUser.role === "instructor") {
+          navigate("/instructor/dashboard");
+        } else {
+          navigate("/dashboard");
+        }
         return;
       }
       toast.error(error.response?.data?.message || "Login failed");

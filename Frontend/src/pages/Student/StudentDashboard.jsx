@@ -13,6 +13,10 @@ const StudentDashboard = () => {
     const token = localStorage.getItem('token') || localStorage.getItem('studentToken');
     if (!isAuthenticated && !token && !student?._id) {
       navigate('/stdlogin?redirect=/dashboard', { replace: true });
+    } else if (student?.role === 'admin') {
+      navigate('/admin', { replace: true });
+    } else if (student?.role === 'instructor') {
+      navigate('/instructor/dashboard', { replace: true });
     }
   }, [isAuthenticated, student, navigate]);
 

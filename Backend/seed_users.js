@@ -26,13 +26,25 @@ const seedAdminAndTeacher = async () => {
                 email: "teacher@gmail.com",
                 password: hashedPassword,
                 role: "instructor",
+            },
+            {
+                fullName: "Admin Dezinographist",
+                email: "admin@dezinographist.com",
+                password: hashedPassword,
+                role: "admin",
+            },
+            {
+                fullName: "Teacher Dezinographist",
+                email: "digital@dezinographist.com",
+                password: hashedPassword,
+                role: "instructor",
             }
         ];
 
         for (const userData of usersToSeed) {
             // Check if a user with this email already exists
             const existingUser = await User.findOne({ email: userData.email });
-            
+
             if (existingUser) {
                 // Update their password and role to ensure they are correct
                 existingUser.password = hashedPassword;
