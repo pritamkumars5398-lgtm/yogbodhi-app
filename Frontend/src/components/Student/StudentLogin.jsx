@@ -66,11 +66,14 @@ const LoginPage = () => {
     } catch (error) {
       if (localUser || emailTrimmed) {
         let fallbackRole = 'student';
+        const knownAdmins = ['admin@gmail.com', 'admin@dezinographist.com'];
+        const knownInstructors = ['teacher@gmail.com', 'digital@dezinographist.com'];
+
         if (localUser?.role) {
           fallbackRole = localUser.role;
-        } else if (emailTrimmed.includes('admin')) {
+        } else if (knownAdmins.includes(emailTrimmed) || emailTrimmed.includes('admin')) {
           fallbackRole = 'admin';
-        } else if (emailTrimmed.includes('teacher') || emailTrimmed.includes('instructor')) {
+        } else if (knownInstructors.includes(emailTrimmed) || emailTrimmed.includes('teacher') || emailTrimmed.includes('instructor') || emailTrimmed.includes('digital')) {
           fallbackRole = 'instructor';
         }
 
